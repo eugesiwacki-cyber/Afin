@@ -8,42 +8,43 @@ const categorias = [
 ];
 
 // dias: 0=lunes, 1=martes ... 5=sábado, 6=domingo
-// km: distancia en kilómetros | precio: 0 es gratis | imagen: nombre de la foto en la carpeta img
+// lat y lng: coordenadas del lugar (ahora son aproximadas del barrio; poné las exactas de cada dirección)
+// precio: 0 es gratis | imagen: nombre de la foto en la carpeta img
 const eventos = [
   { id: 'feria', titulo: 'Feria de arte independiente', cat: 'arte', sub: 'Muestras', dias: [5, 6], dia: 'Sáb y dom', hora: '15 a 20 h', ini: '15:00',
-    lugar: 'Centro cultural', zona: 'Palermo', km: 0.5, cerca: 'a 10 cuadras', precio: 0, imagen: 'feria.jpg', estreno: true,
+    lugar: 'Centro cultural', zona: 'Palermo', lat: -34.5875, lng: -58.4300, precio: 0, imagen: 'feria.jpg', estreno: true,
     desc: 'Más de 40 artistas muestran y venden sus obras. Hay pintura, ilustración y fotografía.',
     etiquetas: ['Arte', 'Muestras', 'Gratis', 'Al aire libre'] },
   { id: 'impro', titulo: 'Noche de impro', cat: 'teatro', sub: 'Comedia', dias: [4], dia: 'Vie', hora: '21 h', ini: '21:00',
-    lugar: 'Teatro del centro', zona: 'Palermo', km: 1.2, precio: 6000, imagen: 'impro.jpg', estreno: true,
+    lugar: 'Teatro del centro', zona: 'Palermo', lat: -34.5890, lng: -58.4250, precio: 6000, imagen: 'impro.jpg', estreno: true,
     desc: 'Cinco improvisadores, cero guion. Cada función es distinta y el público decide.',
     etiquetas: ['Teatro', 'Comedia', 'Estreno', '+16'] },
   { id: 'standup', titulo: 'Stand up', cat: 'teatro', sub: 'Stand up', dias: [5], dia: 'Sáb', hora: '20 h', ini: '20:00',
-    lugar: 'Bar cultural', zona: 'Almagro', km: 2, precio: 8000, imagen: 'standup.jpg',
+    lugar: 'Bar cultural', zona: 'Almagro', lat: -34.6100, lng: -58.4200, precio: 8000, imagen: 'standup.jpg',
     desc: 'Una noche con varios comediantes y humor para todos los gustos.',
     etiquetas: ['Teatro', 'Stand up', 'Noche', '+16'] },
   { id: 'musical', titulo: 'Comedia musical', cat: 'teatro', sub: 'Musical', dias: [5], dia: 'Sáb', hora: '21 h', ini: '21:00',
-    lugar: 'Teatro Villa Crespo', zona: 'Villa Crespo', km: 3, precio: 12000, imagen: 'musical.jpg',
+    lugar: 'Teatro Villa Crespo', zona: 'Villa Crespo', lat: -34.5990, lng: -58.4400, precio: 12000, imagen: 'musical.jpg',
     desc: 'Una comedia con canciones en vivo, actuada y cantada por un elenco joven.',
     etiquetas: ['Teatro', 'Musical', 'En vivo', 'Familiar'] },
   { id: 'teatroind', titulo: 'Teatro independiente', cat: 'teatro', sub: 'Drama', dias: [6], dia: 'Dom', hora: '19 h', ini: '19:00',
-    lugar: 'Sala independiente', zona: 'San Telmo', km: 3, precio: 5000, imagen: 'teatroind.jpg',
+    lugar: 'Sala independiente', zona: 'San Telmo', lat: -34.6210, lng: -58.3720, precio: 5000, imagen: 'teatroind.jpg',
     desc: 'Una obra íntima en una sala chica, con el elenco a pocos metros del público.',
     etiquetas: ['Teatro', 'Drama', 'Independiente', 'Sala chica'] },
   { id: 'cine', titulo: 'Ciclo de cine', cat: 'cine', sub: 'Clásicos', dias: [5], dia: 'Sáb', hora: '19 h', ini: '19:00',
-    lugar: 'Cine Almagro', zona: 'Almagro', km: 2.5, precio: 3500, imagen: 'cine.jpg', estreno: true,
+    lugar: 'Cine Almagro', zona: 'Almagro', lat: -34.6080, lng: -58.4190, precio: 3500, imagen: 'cine.jpg', estreno: true,
     desc: 'Una película por semana, con charla abierta al terminar la función.',
     etiquetas: ['Cine', 'Clásicos', 'Ciclo', 'Charla'] },
   { id: 'diseno', titulo: 'Feria de diseño', cat: 'arte', sub: 'Diseño', dias: [6], dia: 'Dom', hora: '15 h', ini: '15:00',
-    lugar: 'Galpón de diseño', zona: 'Palermo', km: 4, precio: 0, imagen: 'diseno.jpg',
+    lugar: 'Galpón de diseño', zona: 'Palermo', lat: -34.5830, lng: -58.4350, precio: 0, imagen: 'diseno.jpg',
     desc: 'Diseñadores independientes con ropa, objetos, afiches y mucho más.',
     etiquetas: ['Arte', 'Diseño', 'Gratis', 'Feria'] },
   { id: 'muestra', titulo: 'Muestra colectiva', cat: 'arte', sub: 'Muestras', dias: [5, 6], dia: 'Finde', hora: '14 a 19 h', ini: '14:00',
-    lugar: 'Galería de arte', zona: 'Recoleta', km: 3.5, precio: 0, imagen: 'muestra.jpg',
+    lugar: 'Galería de arte', zona: 'Recoleta', lat: -34.5880, lng: -58.3930, precio: 0, imagen: 'muestra.jpg',
     desc: 'Obras de más de 20 artistas en una misma sala.',
     etiquetas: ['Arte', 'Muestras', 'Gratis', 'Pintura'] },
   { id: 'concierto', titulo: 'Concierto íntimo', cat: 'musica', sub: 'Conciertos', dias: [3, 4], dia: 'Jue y vie', hora: '21 h', ini: '21:00',
-    lugar: 'Café concert', zona: 'Colegiales', km: 5, precio: 9000, imagen: 'concierto.jpg', estreno: true,
+    lugar: 'Café concert', zona: 'Colegiales', lat: -34.5760, lng: -58.4480, precio: 9000, imagen: 'concierto.jpg', estreno: true,
     desc: 'Un cantautor en formato acústico, con mesas y a pocos metros del escenario.',
     etiquetas: ['Música', 'Conciertos', 'En vivo', 'Acústico'] }
 ];
@@ -54,8 +55,28 @@ const notifs = [
   { id: 'n2', grupo: 'Hoy', tipo: 'novedad', ico: 'Grilla', color: '#002B49', t: 'Nuevo estreno afín a vos', s: 'Ciclo de cine · Almagro' },
   { id: 'n3', grupo: 'Hoy', tipo: 'aviso', ico: 'Favoritos', color: '#B52000', t: 'Se agotan las entradas', s: 'Stand up · Sáb 20 h' },
   { id: 'n4', grupo: 'Antes', tipo: 'recordatorio', ico: 'Calendario', color: '#53779A', t: 'Agendaste una muestra', s: 'Feria de arte · Sáb 15 h' },
-  { id: 'n5', grupo: 'Antes', tipo: 'novedad', ico: 'Ubicacion', color: '#002B49', t: 'Algo nuevo cerca tuyo', s: 'a 600 m de vos' },
+  { id: 'n5', grupo: 'Antes', tipo: 'novedad', ico: 'Ubicacion', color: '#002B49', t: 'Plan nuevo en Palermo', s: 'Feria de diseño · Dom 15 h' },
   { id: 'n6', grupo: 'Antes', tipo: 'compartido', ico: 'Compartir', color: '#631100', t: 'Cami te compartió un plan', s: 'Concierto íntimo' }
+];
+
+// Preguntas frecuentes (pantalla de Ayuda)
+const FAQ = [
+  ['¿Cómo guardo un plan en mi agenda?', 'Entrá al plan que te interesa y tocá "Guardar en mi agenda". Después lo ves en la pestaña Agenda, en el día que corresponde.'],
+  ['¿Cómo cambio mis intereses?', 'Andá a Perfil y tocá "Editar" al lado de "Mis intereses". Ahí podés elegir otras categorías y subcategorías.'],
+  ['¿Por qué me piden mi ubicación?', 'Para mostrarte qué planes hay cerca tuyo y ordenarlos por distancia. Es opcional, no la guardamos y no la compartimos con nadie.'],
+  ['¿Los planes son solo en Buenos Aires?', 'Sí, por ahora todos los planes son en la Ciudad de Buenos Aires.'],
+  ['¿Cuesta usar Afín?', 'No, Afín es gratis. El precio que ves en cada plan es el de la entrada, y lo define cada lugar.'],
+  ['¿Cómo comparto un plan con mis amigos?', 'Dentro del plan, tocá el botón de compartir. Podés mandarlo por WhatsApp, Instagram, mensaje o copiar el link.']
+];
+
+// Términos y privacidad (texto base: revisalo y ajustalo cuando la app se publique)
+const TERMINOS = [
+  ['Qué es Afín', 'Afín es una app que te ayuda a descubrir propuestas culturales (teatro, cine, arte y música) en la Ciudad de Buenos Aires, según tus intereses.'],
+  ['Uso de la app', 'Podés usar Afín gratis. La información de cada plan (horarios, precios y lugares) la carga cada espacio y puede cambiar, por eso te recomendamos confirmarla antes de ir.'],
+  ['Qué datos guardamos', 'Solo tu nombre, tu edad y tu ciudad, que son los que vos escribís al ingresar. En esta versión se guardan únicamente en tu dispositivo.'],
+  ['Tu ubicación', 'Usamos tu ubicación solo para mostrarte qué planes hay cerca. Es opcional, no la guardamos y no la compartimos. Podés desactivarla cuando quieras desde los permisos de tu navegador.'],
+  ['Lo que no hacemos', 'No vendemos tus datos ni los compartimos con terceros.'],
+  ['Cambios y contacto', 'Si actualizamos estos términos, vas a ver la fecha nueva arriba. Si tenés dudas, escribinos a hola@afin.app.']
 ];
 
 // ===== ESTADO: lo que el usuario va eligiendo =====
@@ -63,11 +84,14 @@ const notifs = [
 let usuario = null;
 try { usuario = JSON.parse(localStorage.getItem('afin_usuario')); } catch (e) {}
 
+// Ubicación de la persona (solo si da permiso; no se guarda en ningún lado)
+let miUbic = null, ubicEstado = 'no'; // 'no' | 'pidiendo' | 'ok' | 'negado' | 'error'
+
 let pantalla = 'splash', pila = [];
-let gustos = [], subsElegidas = [], abierta = null, filtro = 'todo';
+let gustos = [], subsElegidas = [], abierta = null, filtro = 'todo', faqAbierta = null;
 let eventoActual = null, menuAbierto = false, compartirItem = null, copiado = false, modalListo = false;
 let favoritos = [], agenda = [], hechos = [], diaSel = hoyIdx(), favFiltro = 'todo';
-let q = '', chipExp = 'todo', fCats = [], fFecha = null, fDist = 10, fPrecio = 20000, orden = 'cerca';
+let q = '', chipExp = 'todo', fCats = [], fFecha = null, fDist = 20, fPrecio = 20000, orden = 'cerca';
 let notifFiltro = 'todas', notifLeidas = [], recordar = true;
 
 const app = document.getElementById('app');
@@ -77,9 +101,47 @@ function hoyIdx() { return (new Date().getDay() + 6) % 7; }
 function alternar(lista, x) { return lista.includes(x) ? lista.filter(i => i !== x) : [...lista, x]; }
 function buscar(id) { return eventos.find(e => e.id === id); }
 function catDe(id) { return categorias.find(c => c.id === id); }
-function distTxt(e) { return e.cerca || 'a ' + String(e.km).replace('.', ',') + ' km'; }
 function precioTxt(e) { return e.precio ? '$' + e.precio.toLocaleString('es-AR') : 'Gratis'; }
 
+// ===== UBICACIÓN =====
+function pedirUbicacion() {
+  if (!navigator.geolocation) { ubicEstado = 'error'; dibujar(); return; }
+  ubicEstado = 'pidiendo'; dibujar();
+  navigator.geolocation.getCurrentPosition(
+    p => { miUbic = { lat: p.coords.latitude, lng: p.coords.longitude }; ubicEstado = 'ok'; dibujar(); },
+    () => { ubicEstado = 'negado'; dibujar(); },
+    { enableHighAccuracy: false, timeout: 10000, maximumAge: 300000 }
+  );
+}
+// Distancia real en km entre la persona y el evento (null si no hay ubicación)
+function kmA(e) {
+  if (!miUbic) return null;
+  const R = 6371, rad = x => x * Math.PI / 180;
+  const dLat = rad(e.lat - miUbic.lat), dLng = rad(e.lng - miUbic.lng);
+  const a = Math.sin(dLat / 2) ** 2 + Math.cos(rad(miUbic.lat)) * Math.cos(rad(e.lat)) * Math.sin(dLng / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(a));
+}
+// Texto de distancia ("a 850 m", "a 3,2 km"); vacío si no hay ubicación
+function distTxt(e) {
+  const k = kmA(e);
+  if (k === null) return '';
+  return k < 1 ? 'a ' + Math.max(1, Math.round(k * 100)) * 10 + ' m' : 'a ' + k.toFixed(1).replace('.', ',') + ' km';
+}
+// Muestra la distancia si hay ubicación; si no, el barrio
+function subDist(e) { return distTxt(e) || e.zona; }
+
+function avisoUbic() {
+  if (miUbic) return '';
+  const msg = ubicEstado === 'negado' ? 'No pudimos acceder a tu ubicación. Revisá los permisos del navegador y probá de nuevo.'
+    : ubicEstado === 'pidiendo' ? 'Buscando tu ubicación…'
+    : ubicEstado === 'error' ? 'Este navegador no permite usar la ubicación.'
+    : 'Activá tu ubicación para ver qué planes hay cerca tuyo.';
+  const btn = ubicEstado === 'pidiendo' || ubicEstado === 'error' ? ''
+    : `<button class="btn-ubic" onclick="pedirUbicacion()">${ubicEstado === 'negado' ? 'Probar de nuevo' : 'Activar ubicación'}</button>`;
+  return `<div class="aviso-ubic">${icono('Ubicacion')}<div><p>${msg}</p>${btn}</div></div>`;
+}
+
+// ===== NAVEGACIÓN =====
 function ir(p) {
   if (pantalla !== 'splash' && pantalla !== p) pila.push(pantalla);
   pantalla = p; menuAbierto = false; compartirItem = null; dibujar();
@@ -140,7 +202,9 @@ function icono(n, lleno) {
     'Mas': '<path d="M12 5v14M5 12h14"/>',
     'Sol': '<circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/>',
     'Ayuda': '<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 1-1 1.7M12 17v.5"/>',
-    'Salir': '<path d="M10 4H5v16h5M15 8l4 4-4 4M19 12H9"/>'
+    'Salir': '<path d="M10 4H5v16h5M15 8l4 4-4 4M19 12H9"/>',
+    'Documento': '<path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/>',
+    'Play': '<path d="M8 5l11 7-11 7z"/>'
   }[n] || '';
   return `<svg class="svg-ico" viewBox="0 0 24 24" fill="${lleno ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
 }
@@ -175,7 +239,8 @@ function barra(act) {
 function cab(titulo, der) {
   return `<div class="top-estrenos"><button class="atras rojo" onclick="atras()">‹</button><span class="titulo-pag">${titulo}</span>${der === undefined ? `<button class="atras rojo" onclick="abrirMenu()">≡</button>` : der}</div>`;
 }
-function buscador(ph) {
+function buscador() {
+  const ph = miUbic ? 'Buscá cerca tuyo' : 'Buscá planes en Buenos Aires';
   return `<div class="buscador">${icono('Explorar')}<input placeholder="${ph}" value="${q.replace(/"/g, '&quot;')}" oninput="q=this.value" onkeydown="if(event.key==='Enter')ir('resultados')"></div>`;
 }
 function chipsCat(sel, variable, todo) {
@@ -185,9 +250,10 @@ function chipsCat(sel, variable, todo) {
 }
 
 function dibujar() {
-  const vistas = { splash, gustos: vistaGustos, subs: vistaSubs, editar: vistaEditar, inicio: vistaInicio, estrenos: vistaEstrenos,
+  const vistas = { splash, gustos: vistaGustos, subs: vistaSubs, video: vistaVideo, editar: vistaEditar, inicio: vistaInicio, estrenos: vistaEstrenos,
     evento: vistaEvento, explorar: vistaExplorar, filtro: vistaFiltro, resultados: vistaResultados, agenda: vistaAgenda,
-    favoritos: vistaFavoritos, notificaciones: vistaNotif, perfil: vistaPerfil, sobre: vistaSobre, login: vistaLogin };
+    favoritos: vistaFavoritos, notificaciones: vistaNotif, perfil: vistaPerfil, sobre: vistaSobre, login: vistaLogin,
+    ayuda: vistaAyuda, terminos: vistaTerminos };
   let h = vistas[pantalla]();
   if (modalListo) h += vistaListo();
   if (menuAbierto) h += vistaMenu();
@@ -200,7 +266,7 @@ function splash() {
   return `<div class="pantalla splash">${logoImg('claro l-splash')}<div class="lema">Cultura<br>cerca<br>tuyo</div></div>`;
 }
 
-// ===== ¿QUÉ TE GUSTA? =====
+// ===== PASO 1: ¿QUÉ TE GUSTA? =====
 function vistaGustos() {
   const botones = categorias.map(c =>
     `<button class="pill ${gustos.includes(c.id) ? 'on' : ''}" onclick="gustos = alternar(gustos, '${c.id}'); dibujar()">${c.nombre}</button>`).join('');
@@ -215,7 +281,7 @@ function vistaGustos() {
   </div>`;
 }
 
-// ===== SUBCATEGORÍAS (se usa también para editar intereses) =====
+// ===== PASO 2: SUBCATEGORÍAS (se usa también para editar intereses) =====
 function tarjetasSubs(lista) {
   return lista.map(c => {
     const abierto = abierta === c.id;
@@ -236,7 +302,7 @@ function vistaSubs() {
     <div class="top"><button class="atras" onclick="atras()">‹</button><button class="omitir" onclick="irTab('inicio')">Omitir</button></div>
     <h2>Tocá una categoría para ver más</h2>
     <div class="lista">${tarjetasSubs(categorias.filter(c => gustos.includes(c.id)))}</div>
-    <button class="continuar" onclick="irTab('inicio')">Continuar</button>
+    <button class="continuar" onclick="ir('video')">Continuar</button>
   </div>`;
 }
 function vistaEditar() {
@@ -245,6 +311,22 @@ function vistaEditar() {
     <h2>Tocá una categoría para ver más</h2>
     <div class="lista">${tarjetasSubs(categorias)}</div>
     <button class="continuar" onclick="atras()">Guardar</button>
+  </div>`;
+}
+
+// ===== PASO 3: VIDEO "ASÍ FUNCIONA AFÍN" =====
+// El video va en la carpeta video con el nombre intro.mp4 (y opcional portada.jpg)
+function vistaVideo() {
+  const falta = `<div class="video-falta"><div class="play-g">${icono('Play', true)}</div><p>Acá va el video de Afín</p></div>`;
+  const pasos = [['Favoritos', 'Elegí lo que te gusta'], ['Explorar', 'Descubrí planes en Buenos Aires'], ['Compartir', 'Guardá y compartí con tus amigos']]
+    .map(([i, t]) => `<div class="paso-v"><div class="paso-ico">${icono(i)}</div><span>${t}</span></div>`).join('');
+  return `<div class="pantalla">
+    <div class="progreso"><div class="on"></div><div class="on"></div><div class="on"></div></div>
+    <div class="top"><button class="atras" onclick="atras()">‹</button><button class="omitir" onclick="irTab('inicio')">Omitir</button></div>
+    <h2 style="margin:20px 0 14px">Así funciona Afín</h2>
+    <div class="video-box"><video controls playsinline preload="metadata" poster="video/portada.jpg" data-f='${falta}'><source src="video/intro.mp4" type="video/mp4" onerror="this.parentNode.outerHTML=this.parentNode.dataset.f"></video></div>
+    ${pasos}
+    <button class="continuar" onclick="irTab('inicio')">Empezar</button>
   </div>`;
 }
 
@@ -277,7 +359,7 @@ function vistaEstrenos() {
   const lista = eventos.filter(e => e.estreno);
   const filas = lista.map(e =>
     `<div class="fila" onclick="abrirEvento('${e.id}')">${foto(e, 'mini')}
-      <div class="fila-texto"><b>${e.titulo}</b><span>${e.dia} · ${e.hora} · ${distTxt(e)}</span></div>
+      <div class="fila-texto"><b>${e.titulo}</b><span>${e.dia} · ${e.hora} · ${subDist(e)}</span></div>
       <button class="corazon" onclick="alternarFav('${e.id}', event)">${icono('Favoritos', favoritos.includes(e.id))}</button></div>`).join('');
   return `<div class="pantalla">${cab('Estrenos')}<div class="scroll">${foto(lista[0], 'portada')}<div class="lista-est">${filas}</div></div></div>`;
 }
@@ -294,7 +376,7 @@ function vistaEvento() {
       <div class="etiquetas">${etiquetas}</div>
       <div class="datos">
         <div class="dato"><div class="dato-ico">${icono('Calendario')}</div><div><b>${e.dia}</b><span>${e.hora}</span></div></div>
-        <div class="dato"><div class="dato-ico">${icono('Ubicacion')}</div><div><b>${e.lugar}</b><span>${e.zona} · ${distTxt(e)}</span></div></div>
+        <div class="dato"><div class="dato-ico">${icono('Ubicacion')}</div><div><b>${e.lugar}</b><span>${e.zona}${distTxt(e) ? ' · ' + distTxt(e) : ''}</span></div></div>
         <div class="dato"><div class="dato-ico">${icono('Entrada')}</div><div><b>${precioTxt(e)}</b><span>Entrada</span></div></div>
       </div>
       <p class="descripcion">${e.desc}</p>
@@ -310,41 +392,47 @@ function vistaEvento() {
 function mapa() {
   const pins = [[62, 40], [255, 80], [185, 105], [112, 145]].map(([x, y]) =>
     `<path transform="translate(${x} ${y})" d="M0 0c-9 0-14 7-14 14 0 10 14 24 14 24s14-14 14-24c0-7-5-14-14-14z" fill="#B52000"/>`).join('');
+  const yo = miUbic ? `<circle cx="165" cy="190" r="14" fill="#9FB1BB"/><circle cx="165" cy="190" r="7" fill="#002B49" stroke="#fff" stroke-width="2"/>` : '';
   return `<svg class="mapa" viewBox="0 0 360 250"><rect width="360" height="250" fill="#EFE8D6"/>
     <rect x="215" y="12" width="70" height="60" fill="#B7C1C2"/>
     <path d="M0 175 Q90 150 160 185 T360 165 L360 205 Q250 230 170 218 T0 220Z" fill="#9FB1BB"/>
     <g stroke="#fff" stroke-width="10" fill="none"><path d="M60 0V250M215 0V250M0 78H360M0 140H360M10 240L360 70"/></g>
-    ${pins}<circle cx="165" cy="190" r="14" fill="#9FB1BB"/><circle cx="165" cy="190" r="7" fill="#002B49" stroke="#fff" stroke-width="2"/></svg>`;
+    ${pins}${yo}</svg>`;
 }
 function vistaExplorar() {
-  const lista = eventos.filter(e => chipExp === 'todo' || e.cat === chipExp).sort((a, b) => a.km - b.km);
-  const filas = lista.map(e => `<div class="fila" onclick="abrirEvento('${e.id}')">${foto(e, 'mini')}<div class="fila-texto"><b>${e.titulo}</b><span>${distTxt(e)}</span></div></div>`).join('');
+  let lista = eventos.filter(e => chipExp === 'todo' || e.cat === chipExp);
+  if (miUbic) lista = lista.sort((a, b) => kmA(a) - kmA(b));
+  const filas = lista.map(e => `<div class="fila" onclick="abrirEvento('${e.id}')">${foto(e, 'mini')}<div class="fila-texto"><b>${e.titulo}</b><span>${subDist(e)}</span></div></div>`).join('');
   return `<div class="pantalla sinpad"><div class="cuerpo">
-    <div class="buscar-fila">${buscador('Buscá cerca tuyo')}<button class="atras rojo" onclick="ir('filtro')">☰</button></div>
+    <div class="buscar-fila">${buscador()}<button class="atras rojo" onclick="ir('filtro')">☰</button></div>
     ${mapa()}
+    ${avisoUbic()}
     <div class="chips2">${chipsCat(chipExp, 'chipExp', true)}</div>
-    <div class="seccion2"><b>Cerca tuyo</b><span onclick="ir('resultados')">Ver lista</span></div>
+    <div class="seccion2"><b>${miUbic ? 'Cerca tuyo' : 'Planes en Buenos Aires'}</b><span onclick="ir('resultados')">Ver lista</span></div>
     ${filas}
   </div>${barra('Explorar')}</div>`;
 }
 
 // ===== FILTRO =====
-function txtDist() { return 'Hasta ' + fDist + ' km'; }
+function txtDist() { return fDist >= 20 ? 'Cualquiera' : 'Hasta ' + fDist + ' km'; }
 function txtPrecio() { return fPrecio >= 20000 ? 'Cualquiera' : fPrecio === 0 ? 'Gratis' : 'Hasta $' + fPrecio.toLocaleString('es-AR'); }
 const FECHAS = [['hoy', 'Hoy'], ['manana', 'Mañana'], ['finde', 'Finde'], ['semana', 'Semana']];
 function vistaFiltro() {
   const cats = categorias.map(c => `<button class="chip2 ${fCats.includes(c.id) ? 'on' : ''}" onclick="fCats=alternar(fCats,'${c.id}');dibujar()">${c.nombre}</button>`).join('');
   const fechas = FECHAS.map(([id, n]) => `<button class="chip2 ${fFecha === id ? 'on' : ''}" onclick="fFecha=(fFecha==='${id}'?null:'${id}');dibujar()">${n}</button>`).join('');
+  const dist = miUbic
+    ? `<div class="filtro-t">Distancia <span class="lb" id="lbDist">${txtDist()}</span></div>
+       <input type="range" min="1" max="20" value="${fDist}" oninput="fDist=+this.value;document.getElementById('lbDist').textContent=txtDist()">`
+    : `<div class="filtro-t">Distancia</div>${avisoUbic()}`;
   return `<div class="pantalla">
-    <div class="buscar-fila">${buscador('Buscá cerca tuyo')}<span class="ver-lista" onclick="ir('resultados')">Ver lista</span></div>
+    <div class="buscar-fila">${buscador()}<span class="ver-lista" onclick="ir('resultados')">Ver lista</span></div>
     <div class="filtro-t">Categoría</div><div class="chips-fila">${cats}</div>
     <div class="filtro-t">Fecha</div><div class="chips-fila">${fechas}</div>
-    <div class="filtro-t">Distancia <span class="lb" id="lbDist">${txtDist()}</span></div>
-    <input type="range" min="1" max="10" value="${fDist}" oninput="fDist=+this.value;document.getElementById('lbDist').textContent=txtDist()">
+    ${dist}
     <div class="filtro-t">Precio <span class="lb" id="lbPrecio">${txtPrecio()}</span></div>
     <input type="range" min="0" max="20000" step="500" value="${fPrecio}" oninput="fPrecio=+this.value;document.getElementById('lbPrecio').textContent=txtPrecio()">
     <div class="botones-fin">
-      <button class="btn-lim" onclick="fCats=[];fFecha=null;fDist=10;fPrecio=20000;q='';dibujar()">Limpiar</button>
+      <button class="btn-lim" onclick="fCats=[];fFecha=null;fDist=20;fPrecio=20000;q='';dibujar()">Limpiar</button>
       <button class="btn-ver" onclick="ir('resultados')">Ver</button>
     </div>
   </div>`;
@@ -359,14 +447,15 @@ function filtrar() {
     return palabras.every(p => txt.includes(p) || ['en', 'de', 'el', 'la', 'cerca', 'tuyo'].includes(p))
       && (!fCats.length || fCats.includes(e.cat))
       && (!fFecha || e.dias.some(d => set[fFecha].includes(d)))
-      && e.km <= fDist && e.precio <= fPrecio;
+      && (!miUbic || fDist >= 20 || kmA(e) <= fDist)
+      && e.precio <= fPrecio;
   });
-  return r.sort(orden === 'cerca' ? (a, b) => a.km - b.km : (a, b) => a.dias[0] - b.dias[0]);
+  return r.sort(orden === 'cerca' && miUbic ? (a, b) => kmA(a) - kmA(b) : (a, b) => a.dias[0] - b.dias[0]);
 }
 function quitar(k) {
   if (k.startsWith('cat:')) fCats = fCats.filter(x => x !== k.slice(4));
   if (k === 'fecha') fFecha = null;
-  if (k === 'dist') fDist = 10;
+  if (k === 'dist') fDist = 20;
   if (k === 'precio') fPrecio = 20000;
   dibujar();
 }
@@ -374,14 +463,15 @@ function vistaResultados() {
   const r = filtrar();
   const act = [...fCats.map(id => ['cat:' + id, catDe(id).nombre]),
     ...(fFecha ? [['fecha', FECHAS.find(f => f[0] === fFecha)[1]]] : []),
-    ...(fDist < 10 ? [['dist', fDist + ' km']] : []),
+    ...(miUbic && fDist < 20 ? [['dist', fDist + ' km']] : []),
     ...(fPrecio < 20000 ? [['precio', txtPrecio()]] : [])];
   const chips = act.map(([k, n]) => `<button class="chip2 on" onclick="quitar('${k}')">${n}</button>`).join('');
-  const filas = r.map(e => `<div class="fila" onclick="abrirEvento('${e.id}')">${foto(e, 'mini')}<div class="fila-texto"><b>${e.titulo}</b><span>${e.dia} ${e.hora} · ${distTxt(e)}</span></div></div>`).join('');
+  const filas = r.map(e => `<div class="fila" onclick="abrirEvento('${e.id}')">${foto(e, 'mini')}<div class="fila-texto"><b>${e.titulo}</b><span>${e.dia} ${e.hora} · ${subDist(e)}</span></div></div>`).join('');
+  const orde = miUbic ? `<span class="ordenar" onclick="orden=(orden==='cerca'?'dia':'cerca');dibujar()">Ordenar: ${orden === 'cerca' ? 'cercanía' : 'día'}</span>` : '<span></span>';
   return `<div class="pantalla sinpad"><div class="cuerpo">
-    <div class="buscar-fila">${buscador('Buscá cerca tuyo')}<button class="atras rojo" onclick="ir('filtro')">☰</button></div>
+    <div class="buscar-fila">${buscador()}<button class="atras rojo" onclick="ir('filtro')">☰</button></div>
     <div class="chips2">${chips || '<span class="vacio-msg">Sin filtros</span>'}</div>
-    <div class="res-top"><span>${r.length} resultado${r.length === 1 ? '' : 's'}</span><span class="ordenar" onclick="orden=(orden==='cerca'?'dia':'cerca');dibujar()">Ordenar: ${orden === 'cerca' ? 'cercanía' : 'día'}</span></div>
+    <div class="res-top"><span>${r.length} resultado${r.length === 1 ? '' : 's'}</span>${orde}</div>
     ${filas || '<p class="vacio-msg">No hay planes con estos filtros. Probá con otros.</p>'}
   </div>${barra('Explorar')}</div>`;
 }
@@ -467,7 +557,8 @@ function vistaPerfil() {
   const chips = [...categorias.map(c => [c.nombre, gustos.includes(c.id)]), ...subsElegidas.map(s => [s.split(':')[1], true])]
     .map(([n, on]) => `<span class="chip3 ${on ? 'on' : ''}">${n}</span>`).join('');
   const filas = [['Favoritos', 'Favoritos', "ir('favoritos')"], ['Notificaciones', 'Notificaciones', "ir('notificaciones')"],
-    ['Sobre Afín', 'Sobre Afín', "ir('sobre')"], ['Compartir', 'Compartir Afín', "abrirCompartir('afin')"], ['Ayuda', 'Ayuda', ''],
+    ['Sobre Afín', 'Sobre Afín', "ir('sobre')"], ['Compartir', 'Compartir Afín', "abrirCompartir('afin')"],
+    ['Ayuda', 'Ayuda y contacto', "ir('ayuda')"], ['Documento', 'Términos y privacidad', "ir('terminos')"],
     ...(usuario ? [['Salir', 'Cerrar sesión', 'cerrarSesion()']] : [])]
     .map(([i, n, f]) => `<div class="row" onclick="${f}"><span class="ico2">${icono(i)}</span><b>${n}</b><span class="fl2">›</span></div>`).join('');
   const datos = usuario ? [usuario.ciudad, usuario.edad ? usuario.edad + ' años' : ''].filter(Boolean).join(' · ') : '';
@@ -496,10 +587,31 @@ function vistaSobre() {
     </div></div>`;
 }
 
+// ===== AYUDA Y CONTACTO =====
+function vistaAyuda() {
+  const items = FAQ.map(([p, r], i) => `<div class="faq" onclick="faqAbierta=${faqAbierta === i ? 'null' : i};dibujar()">
+    <div class="faq-q"><b>${p}</b><span>${faqAbierta === i ? '⌄' : '›'}</span></div>${faqAbierta === i ? `<p>${r}</p>` : ''}</div>`).join('');
+  return `<div class="pantalla sinpad"><div class="cuerpo">${cab('Ayuda y contacto')}
+    <div class="faqs">${items}</div>
+    <div class="contacto"><h4>¿Necesitás más ayuda?</h4><p>Escribinos y te respondemos lo antes posible.</p>
+      <a class="btn-mail" href="mailto:hola@afin.app?subject=Consulta%20sobre%20Af%C3%ADn">${icono('Mail')}Escribinos</a></div>
+  </div>${barra('Perfil')}</div>`;
+}
+
+// ===== TÉRMINOS Y PRIVACIDAD =====
+function vistaTerminos() {
+  const secs = TERMINOS.map(([t, x]) => `<div class="term"><h4>${t}</h4><p>${x}</p></div>`).join('');
+  return `<div class="pantalla sinpad"><div class="cuerpo">${cab('Términos y privacidad')}
+    <p class="act">Última actualización: noviembre de 2026</p>${secs}
+  </div>${barra('Perfil')}</div>`;
+}
+
 // ===== MENÚ LATERAL =====
 function vistaMenu() {
   const it = [['Inicio', 'inicio'], ['Explorar', 'explorar'], ['Agenda', 'agenda'], ['Favoritos', 'favoritos'], ['Notificaciones', 'notificaciones'], ['Perfil', 'perfil']];
   const items = it.map(([n, p]) => `<button class="menu-item ${pantalla === p ? 'on' : ''}" onclick="irMenu('${p}')">${icono(n)}${n}${pantalla === p ? '<span class="fl">›</span>' : ''}</button>`).join('');
+  const abajo = [['Sobre Afín', 'Sobre Afín', 'sobre'], ['Ayuda', 'Ayuda y contacto', 'ayuda'], ['Documento', 'Términos y privacidad', 'terminos']]
+    .map(([i, n, p]) => `<button class="menu-item ${pantalla === p ? 'on' : ''}" onclick="irMenu('${p}')">${icono(i)}${n}</button>`).join('');
   const quien = usuario
     ? `<div class="perfil-mini"><div class="avatar">${esc(usuario.nombre.charAt(0).toUpperCase())}</div><div><b>${esc(usuario.nombre)}</b><span>${esc(usuario.ciudad)}</span></div></div>`
     : `<div class="perfil-mini" style="cursor:pointer" onclick="irMenu('login')"><div class="avatar">${icono('Perfil')}</div><div><b>Ingresar</b><span>Iniciá sesión</span></div></div>`;
@@ -508,7 +620,7 @@ function vistaMenu() {
     <div class="menu-top">${logoImg('claro l-menu')}<button class="cerrar" onclick="menuAbierto=false; dibujar()">✕</button></div>
     ${quien}
     <div class="menu-items">${items}</div>
-    <div class="menu-sep"><button class="menu-item" onclick="irMenu('sobre')">${icono('Sobre Afín')}Sobre Afín</button></div>
+    <div class="menu-sep">${abajo}</div>
   </div>`;
 }
 
@@ -532,3 +644,5 @@ function vistaCompartir() {
 // ===== ARRANQUE =====
 dibujar();
 setTimeout(() => ir('gustos'), 2000);
+// Si la persona ya había dado permiso antes, se usa la ubicación sin volver a preguntar
+try { navigator.permissions.query({ name: 'geolocation' }).then(r => { if (r.state === 'granted') pedirUbicacion(); }); } catch (e) {}
