@@ -1,4 +1,5 @@
 // ===== CONTENIDO: acá cambiás textos, categorías y eventos =====
+// Todos los planes son en la Ciudad de Buenos Aires
 const categorias = [
   { id: 'teatro', nombre: 'Teatro', color: '#631100', subs: ['Comedia', 'Musical', 'Stand up', 'Tragedia', 'Drama'] },
   { id: 'arte', nombre: 'Arte', color: '#53779A', subs: ['Pintura', 'Diseño', 'Fotografía', 'Muestras'] },
@@ -7,53 +8,54 @@ const categorias = [
 ];
 
 // dias: 0=lunes, 1=martes ... 5=sábado, 6=domingo
-// km: distancia en kilómetros | precio: 0 es gratis | imagen: nombre de la foto en la carpeta img (ej: 'feria.jpg')
+// km: distancia en kilómetros | precio: 0 es gratis | imagen: nombre de la foto en la carpeta img
 const eventos = [
   { id: 'feria', titulo: 'Feria de arte independiente', cat: 'arte', sub: 'Muestras', dias: [5, 6], dia: 'Sáb y dom', hora: '15 a 20 h', ini: '15:00',
-    lugar: 'Centro cultural', zona: 'Palermo', km: 0.5, cerca: 'a 10 cuadras', precio: 0, imagen: '', estreno: true,
+    lugar: 'Centro cultural', zona: 'Palermo', km: 0.5, cerca: 'a 10 cuadras', precio: 0, imagen: 'feria.jpg', estreno: true,
     desc: 'Más de 40 artistas muestran y venden sus obras. Hay pintura, ilustración y fotografía.',
     etiquetas: ['Arte', 'Muestras', 'Gratis', 'Al aire libre'] },
   { id: 'impro', titulo: 'Noche de impro', cat: 'teatro', sub: 'Comedia', dias: [4], dia: 'Vie', hora: '21 h', ini: '21:00',
-    lugar: 'Teatro del centro', zona: 'Palermo', km: 1.2, precio: 6000, imagen: '', estreno: true,
+    lugar: 'Teatro del centro', zona: 'Palermo', km: 1.2, precio: 6000, imagen: 'impro.jpg', estreno: true,
     desc: 'Cinco improvisadores, cero guion. Cada función es distinta y el público decide.',
     etiquetas: ['Teatro', 'Comedia', 'Estreno', '+16'] },
   { id: 'standup', titulo: 'Stand up', cat: 'teatro', sub: 'Stand up', dias: [5], dia: 'Sáb', hora: '20 h', ini: '20:00',
-    lugar: 'Bar cultural', zona: 'Almagro', km: 2, precio: 8000, imagen: '',
+    lugar: 'Bar cultural', zona: 'Almagro', km: 2, precio: 8000, imagen: 'standup.jpg',
     desc: 'Una noche con varios comediantes y humor para todos los gustos.',
     etiquetas: ['Teatro', 'Stand up', 'Noche', '+16'] },
   { id: 'musical', titulo: 'Comedia musical', cat: 'teatro', sub: 'Musical', dias: [5], dia: 'Sáb', hora: '21 h', ini: '21:00',
-    lugar: 'Teatro Villa Crespo', zona: 'Villa Crespo', km: 3, precio: 12000, imagen: '',
+    lugar: 'Teatro Villa Crespo', zona: 'Villa Crespo', km: 3, precio: 12000, imagen: 'musical.jpg',
     desc: 'Una comedia con canciones en vivo, actuada y cantada por un elenco joven.',
     etiquetas: ['Teatro', 'Musical', 'En vivo', 'Familiar'] },
   { id: 'teatroind', titulo: 'Teatro independiente', cat: 'teatro', sub: 'Drama', dias: [6], dia: 'Dom', hora: '19 h', ini: '19:00',
-    lugar: 'Sala independiente', zona: 'San Telmo', km: 3, precio: 5000, imagen: '',
+    lugar: 'Sala independiente', zona: 'San Telmo', km: 3, precio: 5000, imagen: 'teatroind.jpg',
     desc: 'Una obra íntima en una sala chica, con el elenco a pocos metros del público.',
     etiquetas: ['Teatro', 'Drama', 'Independiente', 'Sala chica'] },
   { id: 'cine', titulo: 'Ciclo de cine', cat: 'cine', sub: 'Clásicos', dias: [5], dia: 'Sáb', hora: '19 h', ini: '19:00',
-    lugar: 'Cine Almagro', zona: 'Almagro', km: 2.5, precio: 3500, imagen: '', estreno: true,
+    lugar: 'Cine Almagro', zona: 'Almagro', km: 2.5, precio: 3500, imagen: 'cine.jpg', estreno: true,
     desc: 'Una película por semana, con charla abierta al terminar la función.',
     etiquetas: ['Cine', 'Clásicos', 'Ciclo', 'Charla'] },
   { id: 'diseno', titulo: 'Feria de diseño', cat: 'arte', sub: 'Diseño', dias: [6], dia: 'Dom', hora: '15 h', ini: '15:00',
-    lugar: 'Galpón de diseño', zona: 'Palermo', km: 4, precio: 0, imagen: '',
+    lugar: 'Galpón de diseño', zona: 'Palermo', km: 4, precio: 0, imagen: 'diseno.jpg',
     desc: 'Diseñadores independientes con ropa, objetos, afiches y mucho más.',
     etiquetas: ['Arte', 'Diseño', 'Gratis', 'Feria'] },
   { id: 'muestra', titulo: 'Muestra colectiva', cat: 'arte', sub: 'Muestras', dias: [5, 6], dia: 'Finde', hora: '14 a 19 h', ini: '14:00',
-    lugar: 'Galería de arte', zona: 'Recoleta', km: 3.5, precio: 0, imagen: '',
+    lugar: 'Galería de arte', zona: 'Recoleta', km: 3.5, precio: 0, imagen: 'muestra.jpg',
     desc: 'Obras de más de 20 artistas en una misma sala.',
     etiquetas: ['Arte', 'Muestras', 'Gratis', 'Pintura'] },
   { id: 'concierto', titulo: 'Concierto íntimo', cat: 'musica', sub: 'Conciertos', dias: [3, 4], dia: 'Jue y vie', hora: '21 h', ini: '21:00',
-    lugar: 'Café concert', zona: 'Colegiales', km: 5, precio: 9000, imagen: '', estreno: true,
+    lugar: 'Café concert', zona: 'Colegiales', km: 5, precio: 9000, imagen: 'concierto.jpg', estreno: true,
     desc: 'Un cantautor en formato acústico, con mesas y a pocos metros del escenario.',
     etiquetas: ['Música', 'Conciertos', 'En vivo', 'Acústico'] }
 ];
 
+// ico: nombre del ícono (los nombres están en la función icono)
 const notifs = [
-  { id: 'n1', grupo: 'Hoy', tipo: 'recordatorio', ico: '🔔', color: '#631100', t: 'Empieza en 2 horas', s: 'Noche de impro · 21 h' },
-  { id: 'n2', grupo: 'Hoy', tipo: 'novedad', ico: '▦', color: '#002B49', t: 'Nuevo estreno afín a vos', s: 'Ciclo de cine · Almagro' },
-  { id: 'n3', grupo: 'Hoy', tipo: 'aviso', ico: '♥', color: '#B52000', t: 'Se agotan las entradas', s: 'Stand up · Sáb 20 h' },
-  { id: 'n4', grupo: 'Antes', tipo: 'recordatorio', ico: '📅', color: '#53779A', t: 'Agendaste una muestra', s: 'Feria de arte · Sáb 15 h' },
-  { id: 'n5', grupo: 'Antes', tipo: 'novedad', ico: '📍', color: '#002B49', t: 'Algo nuevo cerca tuyo', s: 'a 600 m de vos' },
-  { id: 'n6', grupo: 'Antes', tipo: 'compartido', ico: '⤴', color: '#631100', t: 'Cami te compartió un plan', s: 'Concierto íntimo' }
+  { id: 'n1', grupo: 'Hoy', tipo: 'recordatorio', ico: 'Notificaciones', color: '#631100', t: 'Empieza en 2 horas', s: 'Noche de impro · 21 h' },
+  { id: 'n2', grupo: 'Hoy', tipo: 'novedad', ico: 'Grilla', color: '#002B49', t: 'Nuevo estreno afín a vos', s: 'Ciclo de cine · Almagro' },
+  { id: 'n3', grupo: 'Hoy', tipo: 'aviso', ico: 'Favoritos', color: '#B52000', t: 'Se agotan las entradas', s: 'Stand up · Sáb 20 h' },
+  { id: 'n4', grupo: 'Antes', tipo: 'recordatorio', ico: 'Calendario', color: '#53779A', t: 'Agendaste una muestra', s: 'Feria de arte · Sáb 15 h' },
+  { id: 'n5', grupo: 'Antes', tipo: 'novedad', ico: 'Ubicacion', color: '#002B49', t: 'Algo nuevo cerca tuyo', s: 'a 600 m de vos' },
+  { id: 'n6', grupo: 'Antes', tipo: 'compartido', ico: 'Compartir', color: '#631100', t: 'Cami te compartió un plan', s: 'Concierto íntimo' }
 ];
 
 // ===== ESTADO: lo que el usuario va eligiendo =====
@@ -118,18 +120,29 @@ function esc(s) {
   return String(s || '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 }
 
-// Íconos del menú: el nombre tiene que coincidir con el título
-function icono(n) {
+// Íconos minimalistas. Para rellenar uno (por ejemplo el corazón de favoritos) se usa icono('Favoritos', true)
+function icono(n, lleno) {
   const p = {
     'Inicio': '<path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/>',
     'Explorar': '<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>',
     'Agenda': '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+    'Calendario': '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
     'Favoritos': '<path d="M12 20s-8-5-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 9c0 6-8 11-8 11z"/>',
     'Notificaciones': '<path d="M6 17V11a6 6 0 0 1 12 0v6l2 2H4z"/><path d="M10 21h4"/>',
     'Perfil': '<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/>',
-    'Sobre Afín': '<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/>'
+    'Sobre Afín': '<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/>',
+    'Compartir': '<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.5l6.8-4M8.6 13.5l6.8 4"/>',
+    'Ubicacion': '<path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>',
+    'Entrada': '<path d="M3 9V6h18v3a3 3 0 0 0 0 6v3H3v-3a3 3 0 0 0 0-6z"/><path d="M14 6v12"/>',
+    'Grilla': '<rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 12h16M12 4v16"/>',
+    'Mensaje': '<path d="M4 5h16v11H9l-5 4z"/>',
+    'Mail': '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>',
+    'Mas': '<path d="M12 5v14M5 12h14"/>',
+    'Sol': '<circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/>',
+    'Ayuda': '<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 1-1 1.7M12 17v.5"/>',
+    'Salir': '<path d="M10 4H5v16h5M15 8l4 4-4 4M19 12H9"/>'
   }[n] || '';
-  return `<svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
+  return `<svg class="svg-ico" viewBox="0 0 24 24" fill="${lleno ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
 }
 
 // Ingreso: guarda nombre, edad y ciudad en el navegador
@@ -147,11 +160,12 @@ function cerrarSesion() {
   dibujar();
 }
 
-// Foto del evento; si todavía no hay, muestra un bloque del color de su categoría
+// Foto del evento; si todavía no hay (o no se encuentra), muestra un bloque del color de su categoría
 function foto(e, clase) {
+  const bloque = `<div class="foto vacio ${clase}" style="background:${catDe(e.cat).color}"></div>`;
   return e.imagen
-    ? `<img class="foto ${clase}" src="img/${e.imagen}" alt="${e.titulo}">`
-    : `<div class="foto vacio ${clase}" style="background:${catDe(e.cat).color}"></div>`;
+    ? `<img class="foto ${clase}" src="img/${e.imagen}" alt="${e.titulo}" onerror="this.outerHTML=this.dataset.f" data-f='${bloque}'>`
+    : bloque;
 }
 
 function barra(act) {
@@ -162,7 +176,7 @@ function cab(titulo, der) {
   return `<div class="top-estrenos"><button class="atras rojo" onclick="atras()">‹</button><span class="titulo-pag">${titulo}</span>${der === undefined ? `<button class="atras rojo" onclick="abrirMenu()">≡</button>` : der}</div>`;
 }
 function buscador(ph) {
-  return `<div class="buscador"><span>🔍</span><input placeholder="${ph}" value="${q.replace(/"/g, '&quot;')}" oninput="q=this.value" onkeydown="if(event.key==='Enter')ir('resultados')"></div>`;
+  return `<div class="buscador">${icono('Explorar')}<input placeholder="${ph}" value="${q.replace(/"/g, '&quot;')}" oninput="q=this.value" onkeydown="if(event.key==='Enter')ir('resultados')"></div>`;
 }
 function chipsCat(sel, variable, todo) {
   const l = todo ? [['todo', 'Todo']] : [];
@@ -264,7 +278,7 @@ function vistaEstrenos() {
   const filas = lista.map(e =>
     `<div class="fila" onclick="abrirEvento('${e.id}')">${foto(e, 'mini')}
       <div class="fila-texto"><b>${e.titulo}</b><span>${e.dia} · ${e.hora} · ${distTxt(e)}</span></div>
-      <button class="corazon" onclick="alternarFav('${e.id}', event)">${favoritos.includes(e.id) ? '♥' : '♡'}</button></div>`).join('');
+      <button class="corazon" onclick="alternarFav('${e.id}', event)">${icono('Favoritos', favoritos.includes(e.id))}</button></div>`).join('');
   return `<div class="pantalla">${cab('Estrenos')}<div class="scroll">${foto(lista[0], 'portada')}<div class="lista-est">${filas}</div></div></div>`;
 }
 
@@ -275,19 +289,19 @@ function vistaEvento() {
   return `<div class="pantalla evento">
     <div class="evento-scroll">
       <button class="atras rojo" onclick="atras()">‹</button>
-      <div class="portada-wrap">${foto(e, 'portada')}<button class="corazon-flot" onclick="alternarFav('${e.id}', event)">${favoritos.includes(e.id) ? '♥' : '♡'}</button></div>
+      <div class="portada-wrap">${foto(e, 'portada')}<button class="corazon-flot" onclick="alternarFav('${e.id}', event)">${icono('Favoritos', favoritos.includes(e.id))}</button></div>
       <h1 class="serif titulo-ev">${e.titulo}</h1>
       <div class="etiquetas">${etiquetas}</div>
       <div class="datos">
-        <div class="dato"><div class="dato-ico">📅</div><div><b>${e.dia}</b><span>${e.hora}</span></div></div>
-        <div class="dato"><div class="dato-ico">📍</div><div><b>${e.lugar}</b><span>${e.zona} · ${distTxt(e)}</span></div></div>
-        <div class="dato"><div class="dato-ico">🎟</div><div><b>${precioTxt(e)}</b><span>Entrada</span></div></div>
+        <div class="dato"><div class="dato-ico">${icono('Calendario')}</div><div><b>${e.dia}</b><span>${e.hora}</span></div></div>
+        <div class="dato"><div class="dato-ico">${icono('Ubicacion')}</div><div><b>${e.lugar}</b><span>${e.zona} · ${distTxt(e)}</span></div></div>
+        <div class="dato"><div class="dato-ico">${icono('Entrada')}</div><div><b>${precioTxt(e)}</b><span>Entrada</span></div></div>
       </div>
       <p class="descripcion">${e.desc}</p>
     </div>
     <div class="barra-ev">
       <button class="guardar ${guardado ? 'listo' : ''}" onclick="guardarAgenda('${e.id}')">${guardado ? 'Guardado en tu agenda' : 'Guardar en mi agenda'}</button>
-      <button class="compartir-btn" onclick="abrirCompartir('${e.id}')">⤴</button>
+      <button class="compartir-btn" onclick="abrirCompartir('${e.id}')">${icono('Compartir')}</button>
     </div>
   </div>`;
 }
@@ -385,7 +399,7 @@ function vistaAgenda() {
       <div style="flex:1"><b>${e.titulo}</b><span>${catDe(e.cat).nombre} · ${e.zona}</span></div>
       <button class="check ${hechos.includes(e.id) ? 'on' : ''}" onclick="event.stopPropagation();hechos=alternar(hechos,'${e.id}');dibujar()">${hechos.includes(e.id) ? '✓' : ''}</button>
     </div></div>`).join('');
-  const vacio = `<div class="vacio-box"><div class="circ-blanco">📅</div><div class="serif">Sin planes este día</div>
+  const vacio = `<div class="vacio-box"><div class="circ-blanco">${icono('Calendario')}</div><div class="serif">Sin planes este día</div>
     <p>Probá con otro día o explorá propuestas cerca tuyo</p><button class="continuar" onclick="irTab('explorar')">Explorar planes</button></div>`;
   return `<div class="pantalla sinpad"><div class="cuerpo">
     <div class="header" style="padding:0">${logoImg('l-header')}<button class="menu" onclick="abrirMenu()">≡</button></div>
@@ -406,8 +420,8 @@ function vistaListo() {
 function vistaFavoritos() {
   const lista = favoritos.map(buscar).filter(e => favFiltro === 'todo' || e.cat === favFiltro);
   const cards = lista.map(e => `<div class="fav-card" onclick="abrirEvento('${e.id}')"><div class="portada-wrap" style="margin:0">${foto(e, 'fav')}
-    <button class="corazon-flot" onclick="alternarFav('${e.id}', event)">♥</button></div><b>${e.titulo}</b><span class="s">${e.dia} ${e.hora}</span></div>`).join('');
-  const vacio = `<div class="vacio-box"><div class="circ-blanco" style="color:var(--bordo)">♡</div><div class="serif">Todavía no guardaste nada</div>
+    <button class="corazon-flot" onclick="alternarFav('${e.id}', event)">${icono('Favoritos', true)}</button></div><b>${e.titulo}</b><span class="s">${e.dia} ${e.hora}</span></div>`).join('');
+  const vacio = `<div class="vacio-box"><div class="circ-blanco">${icono('Favoritos')}</div><div class="serif">Todavía no guardaste nada</div>
     <p>Tocá el corazón en los planes que te gusten y los vas a ver acá.</p><button class="continuar" onclick="irTab('explorar')">Explorar planes</button></div>`;
   return `<div class="pantalla sinpad"><div class="cuerpo">${cab('Favoritos')}
     ${favoritos.length ? `<div class="chips2">${chipsCat(favFiltro, 'favFiltro', true)}</div>${cards ? `<div class="fav-grid">${cards}</div>` : '<p class="vacio-msg">No tenés favoritos de esta categoría.</p>'}` : vacio}
@@ -420,7 +434,7 @@ function vistaNotif() {
   const grupo = g => {
     const it = lista.filter(n => n.grupo === g);
     return it.length ? `<div class="n-sec">${g}</div>` + it.map(n => `<div class="n-item" onclick="if(!notifLeidas.includes('${n.id}'))notifLeidas.push('${n.id}');dibujar()">
-      <div class="n-ico" style="background:${n.color}">${n.ico}</div><div class="n-txt"><b>${n.t}</b><span>${n.s}</span></div>
+      <div class="n-ico" style="background:${n.color}">${icono(n.ico)}</div><div class="n-txt"><b>${n.t}</b><span>${n.s}</span></div>
       ${(n.id === 'n1' || n.id === 'n2') && !notifLeidas.includes(n.id) ? '<div class="punto-r"></div>' : ''}</div>`).join('') : '';
   };
   return `<div class="pantalla sinpad"><div class="cuerpo">${cab('Notificaciones')}
@@ -452,16 +466,17 @@ function vistaLogin() {
 function vistaPerfil() {
   const chips = [...categorias.map(c => [c.nombre, gustos.includes(c.id)]), ...subsElegidas.map(s => [s.split(':')[1], true])]
     .map(([n, on]) => `<span class="chip3 ${on ? 'on' : ''}">${n}</span>`).join('');
-  const filas = [['♡', 'Favoritos', "ir('favoritos')"], ['🔔', 'Notificaciones', "ir('notificaciones')"], ['ⓘ', 'Sobre Afín', "ir('sobre')"],
-    ['⤴', 'Compartir Afín', "abrirCompartir('afin')"], ['?', 'Ayuda', ''], ...(usuario ? [['↩', 'Cerrar sesión', 'cerrarSesion()']] : [])]
-    .map(([i, n, f]) => `<div class="row" onclick="${f}"><span class="ico2">${i}</span><b>${n}</b><span class="fl2">›</span></div>`).join('');
+  const filas = [['Favoritos', 'Favoritos', "ir('favoritos')"], ['Notificaciones', 'Notificaciones', "ir('notificaciones')"],
+    ['Sobre Afín', 'Sobre Afín', "ir('sobre')"], ['Compartir', 'Compartir Afín', "abrirCompartir('afin')"], ['Ayuda', 'Ayuda', ''],
+    ...(usuario ? [['Salir', 'Cerrar sesión', 'cerrarSesion()']] : [])]
+    .map(([i, n, f]) => `<div class="row" onclick="${f}"><span class="ico2">${icono(i)}</span><b>${n}</b><span class="fl2">›</span></div>`).join('');
   const datos = usuario ? [usuario.ciudad, usuario.edad ? usuario.edad + ' años' : ''].filter(Boolean).join(' · ') : '';
   const cabecera = usuario
     ? `<div class="avatar-g">${esc(usuario.nombre.charAt(0).toUpperCase())}</div><div class="serif p-nombre">${esc(usuario.nombre)}</div><div class="p-sub">${esc(datos)}</div>`
     : `<div class="avatar-g">${icono('Perfil')}</div><div class="serif p-nombre">Invitado</div><div class="p-sub">Ingresá para guardar tus planes</div>
        <button class="continuar" style="display:block;margin:14px auto 0;padding:0 40px" onclick="ir('login')">Ingresar</button>`;
   return `<div class="pantalla sinpad"><div class="cuerpo">
-    <div class="perfil-top"><span>Perfil</span><span class="circ-blanco" style="width:42px;height:42px;font-size:20px">☼</span></div>
+    <div class="perfil-top"><span>Perfil</span><span class="circ-blanco circ-sm">${icono('Sol')}</span></div>
     ${cabecera}
     <div class="int-top"><span style="color:var(--bordo);cursor:default">Mis intereses</span><span onclick="ir('editar')">Editar</span></div>
     <div class="chips3">${chips}</div>
@@ -502,8 +517,8 @@ function vistaCompartir() {
   const c = compartirItem;
   const amigos = [['Cami', '#631100', 'C'], ['Juan', '#002B49', 'J'], ['Lu', '#53779A', 'L'], ['Mati', '#B52000', 'M']]
     .map(a => `<div><div class="circ" style="background:${a[1]}">${a[2]}</div>${a[0]}</div>`).join('');
-  const redes = [['WhatsApp', '#002B49', '💬'], ['Instagram', '#631100', '⌘'], ['Mensajes', '#53779A', '✉'], ['Más', '#35201A', '+']]
-    .map(r => `<div><div class="cuad" style="background:${r[1]}">${r[2]}</div>${r[0]}</div>`).join('');
+  const redes = [['WhatsApp', '#002B49', 'Mensaje'], ['Instagram', '#631100', 'Compartir'], ['Mensajes', '#53779A', 'Mail'], ['Más', '#35201A', 'Mas']]
+    .map(r => `<div><div class="cuad" style="background:${r[1]}">${icono(r[2])}</div>${r[0]}</div>`).join('');
   const img = c.e ? foto(c.e, 'mini') : `<div class="foto mini" style="background:#631100;display:flex;align-items:center;justify-content:center">${logoImg('claro l-mini')}</div>`;
   return `<div class="menu-fondo" onclick="compartirItem=null; dibujar()"></div>
   <div class="hoja"><div class="agarre"></div>
