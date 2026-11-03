@@ -1,75 +1,215 @@
-// ===== CONTENIDO: acá cambiás textos, categorías y eventos =====
-// Todos los planes son en la Ciudad de Buenos Aires
+// =====================================================================
+//  CATEGORÍAS
+// =====================================================================
 const categorias = [
-  { id: 'teatro', nombre: 'Teatro', color: '#631100', subs: ['Comedia', 'Musical', 'Stand up', 'Tragedia', 'Drama'] },
+  { id: 'teatro', nombre: 'Teatro', color: '#631100', subs: ['Comedia', 'Musical', 'Stand up', 'Tragedia', 'Drama', 'Ópera'] },
   { id: 'arte', nombre: 'Arte', color: '#53779A', subs: ['Pintura', 'Diseño', 'Fotografía', 'Muestras'] },
   { id: 'cine', nombre: 'Cine', color: '#2F5D3A', subs: ['Estrenos', 'Clásicos', 'Animación', 'Documental'] },
   { id: 'musica', nombre: 'Música', color: '#8A5A00', subs: ['Conciertos', 'Festivales'] }
 ];
 
-// dias: 0=lunes, 1=martes ... 5=sábado, 6=domingo
-// lat y lng: coordenadas del lugar (ahora son aproximadas del barrio; poné las exactas de cada dirección)
-// precio: 0 es gratis | imagen: nombre de la foto en la carpeta img
-const eventos = [
-  { id: 'feria', titulo: 'Feria de arte independiente', cat: 'arte', sub: 'Muestras', dias: [5, 6], dia: 'Sáb y dom', hora: '15 a 20 h', ini: '15:00',
-    lugar: 'Centro cultural', zona: 'Palermo', lat: -34.5875, lng: -58.4300, precio: 0, imagen: 'feria.jpg', estreno: true,
-    desc: 'Más de 40 artistas muestran y venden sus obras. Hay pintura, ilustración y fotografía.',
-    etiquetas: ['Arte', 'Muestras', 'Gratis', 'Al aire libre'] },
-  { id: 'impro', titulo: 'Noche de impro', cat: 'teatro', sub: 'Comedia', dias: [4], dia: 'Vie', hora: '21 h', ini: '21:00',
-    lugar: 'Teatro del centro', zona: 'Palermo', lat: -34.5890, lng: -58.4250, precio: 6000, imagen: 'impro.jpg', estreno: true,
-    desc: 'Cinco improvisadores, cero guion. Cada función es distinta y el público decide.',
-    etiquetas: ['Teatro', 'Comedia', 'Estreno', '+16'] },
-  { id: 'standup', titulo: 'Stand up', cat: 'teatro', sub: 'Stand up', dias: [5], dia: 'Sáb', hora: '20 h', ini: '20:00',
-    lugar: 'Bar cultural', zona: 'Almagro', lat: -34.6100, lng: -58.4200, precio: 8000, imagen: 'standup.jpg',
-    desc: 'Una noche con varios comediantes y humor para todos los gustos.',
-    etiquetas: ['Teatro', 'Stand up', 'Noche', '+16'] },
-  { id: 'musical', titulo: 'Comedia musical', cat: 'teatro', sub: 'Musical', dias: [5], dia: 'Sáb', hora: '21 h', ini: '21:00',
-    lugar: 'Teatro Villa Crespo', zona: 'Villa Crespo', lat: -34.5990, lng: -58.4400, precio: 12000, imagen: 'musical.jpg',
-    desc: 'Una comedia con canciones en vivo, actuada y cantada por un elenco joven.',
-    etiquetas: ['Teatro', 'Musical', 'En vivo', 'Familiar'] },
-  { id: 'teatroind', titulo: 'Teatro independiente', cat: 'teatro', sub: 'Drama', dias: [6], dia: 'Dom', hora: '19 h', ini: '19:00',
-    lugar: 'Sala independiente', zona: 'San Telmo', lat: -34.6210, lng: -58.3720, precio: 5000, imagen: 'teatroind.jpg',
-    desc: 'Una obra íntima en una sala chica, con el elenco a pocos metros del público.',
-    etiquetas: ['Teatro', 'Drama', 'Independiente', 'Sala chica'] },
-  { id: 'cine', titulo: 'Ciclo de cine', cat: 'cine', sub: 'Clásicos', dias: [5], dia: 'Sáb', hora: '19 h', ini: '19:00',
-    lugar: 'Cine Almagro', zona: 'Almagro', lat: -34.6080, lng: -58.4190, precio: 3500, imagen: 'cine.jpg', estreno: true,
-    desc: 'Una película por semana, con charla abierta al terminar la función.',
-    etiquetas: ['Cine', 'Clásicos', 'Ciclo', 'Charla'] },
-  { id: 'diseno', titulo: 'Feria de diseño', cat: 'arte', sub: 'Diseño', dias: [6], dia: 'Dom', hora: '15 h', ini: '15:00',
-    lugar: 'Galpón de diseño', zona: 'Palermo', lat: -34.5830, lng: -58.4350, precio: 0, imagen: 'diseno.jpg',
-    desc: 'Diseñadores independientes con ropa, objetos, afiches y mucho más.',
-    etiquetas: ['Arte', 'Diseño', 'Gratis', 'Feria'] },
-  { id: 'muestra', titulo: 'Muestra colectiva', cat: 'arte', sub: 'Muestras', dias: [5, 6], dia: 'Finde', hora: '14 a 19 h', ini: '14:00',
-    lugar: 'Galería de arte', zona: 'Recoleta', lat: -34.5880, lng: -58.3930, precio: 0, imagen: 'muestra.jpg',
-    desc: 'Obras de más de 20 artistas en una misma sala.',
-    etiquetas: ['Arte', 'Muestras', 'Gratis', 'Pintura'] },
-  { id: 'concierto', titulo: 'Concierto íntimo', cat: 'musica', sub: 'Conciertos', dias: [3, 4], dia: 'Jue y vie', hora: '21 h', ini: '21:00',
-    lugar: 'Café concert', zona: 'Colegiales', lat: -34.5760, lng: -58.4480, precio: 9000, imagen: 'concierto.jpg', estreno: true,
-    desc: 'Un cantautor en formato acústico, con mesas y a pocos metros del escenario.',
-    etiquetas: ['Música', 'Conciertos', 'En vivo', 'Acústico'] }
+// =====================================================================
+//  LUGARES: nombre, dirección, barrio, latitud, longitud, foto
+//  La foto de cada lugar la usan todos sus planes (guardala en la carpeta img)
+// =====================================================================
+const LUG = (nombre, dir, zona, lat, lng, imagen) => ({ nombre, dir, zona, lat, lng, imagen });
+const LUGARES = {
+  // --- Museos ---
+  bellasartes: LUG('Museo Nacional de Bellas Artes', 'Av. del Libertador 1473', 'Recoleta', -34.5838, -58.3927, 'bellasartes.jpg'),
+  mariano: LUG('Centro Cultural Mariano Moreno', 'Agüero 2502 (Biblioteca Nacional)', 'Recoleta', -34.5841, -58.3967, 'mariano.jpg'),
+  casaheredia: LUG('Museo Moderno – Casa Heredia', 'Av. Caseros, San Telmo', 'San Telmo', -34.6265, -58.3740, 'casaheredia.jpg'),
+  decorativo: LUG('Museo Nacional de Arte Decorativo', 'Av. del Libertador 1902', 'Recoleta', -34.5812, -58.4010, 'decorativo.jpg'),
+  popular: LUG('Museo de Arte Popular José Hernández', 'Av. del Libertador 2373', 'Palermo', -34.5799, -58.4047, 'popular.jpg'),
+  malba: LUG('MALBA', 'Av. Pres. Figueroa Alcorta 3415', 'Palermo', -34.5771, -58.4033, 'malba.jpg'),
+  macba: LUG('MACBA', 'Av. San Juan 328', 'San Telmo', -34.6220, -58.3702, 'macba.jpg'),
+  moderno: LUG('Museo Moderno', 'Av. San Juan 350', 'San Telmo', -34.6222, -58.3706, 'moderno.jpg'),
+  xul: LUG('Museo Xul Solar', 'Laprida 1212', 'Recoleta', -34.5948, -58.4078, 'xul.jpg'),
+  fernandez: LUG('Museo Isaac Fernández Blanco', 'Suipacha 1422', 'Retiro', -34.5941, -58.3786, 'fernandez.jpg'),
+  caminito: LUG('Caminito', 'Del Valle Iberlucea', 'La Boca', -34.6385, -58.3632, 'caminito.jpg'),
+  evita: LUG('Museo Evita', 'Lafinur 2988', 'Palermo', -34.5856, -58.4107, 'evita.jpg'),
+  maman: LUG('Maman Fine Art', 'Av. del Libertador 2475', 'Palermo', -34.5794, -58.4060, 'maman.jpg'),
+  // --- Teatros ---
+  colon: LUG('Teatro Colón', 'Cerrito 628', 'Microcentro', -34.6010, -58.3834, 'colon.jpg'),
+  cervantes: LUG('Teatro Nacional Cervantes', 'Libertad 815', 'Retiro', -34.5995, -58.3860, 'cervantes.jpg'),
+  laplaza: LUG('Paseo La Plaza', 'Av. Corrientes 1660', 'San Nicolás', -34.6041, -58.3895, 'laplaza.jpg'),
+  astral: LUG('Teatro Astral', 'Av. Corrientes 1639', 'San Nicolás', -34.6040, -58.3891, 'astral.jpg'),
+  metropolitan: LUG('Teatro Metropolitan', 'Av. Corrientes 1343', 'San Nicolás', -34.6036, -58.3858, 'metropolitan.jpg'),
+  lola: LUG('Teatro Lola Membrives', 'Av. Corrientes 1280', 'San Nicolás', -34.6038, -58.3856, 'lola.jpg'),
+  sanmartin: LUG('Teatro General San Martín', 'Av. Corrientes 1530', 'San Nicolás', -34.6040, -58.3879, 'sanmartin.jpg'),
+  picadero: LUG('Teatro Picadero', 'Enrique Santos Discépolo 1857', 'Balvanera', -34.6044, -58.3935, 'picadero.jpg'),
+  teatrobsas: LUG('Teatro Buenos Aires', '', 'San Nicolás', -34.6040, -58.3870, 'teatrobsas.jpg'),
+  multiteatro: LUG('Multiteatro', 'Av. Corrientes 1283', 'San Nicolás', -34.6037, -58.3860, 'multiteatro.jpg'),
+  standupclub: LUG('Stand Up Club', '', 'Recoleta', -34.5885, -58.3930, 'standupclub.jpg'),
+  maipo: LUG('Teatro Maipo', 'Esmeralda 443', 'San Nicolás', -34.6028, -58.3768, 'maipo.jpg'),
+  // --- Cines ---
+  cinepolisrecoleta: LUG('Cinépolis Recoleta', 'Vicente López 2050', 'Recoleta', -34.5878, -58.3920, 'cinepolisrecoleta.jpg'),
+  cinemarkpalermo: LUG('Cinemark Palermo', '', 'Palermo', -34.5866, -58.4114, 'cinemarkpalermo.jpg'),
+  cinemarkabasto: LUG('Cinemark Abasto', 'Av. Corrientes 3247 (Abasto Shopping)', 'Balvanera', -34.6033, -58.4113, 'cinemarkabasto.jpg'),
+  showcasebelgrano: LUG('Cine Showcase Belgrano', '', 'Belgrano', -34.5630, -58.4560, 'showcasebelgrano.jpg'),
+  plazahoussay: LUG('Cinépolis Plaza Houssay', '', 'Recoleta', -34.5983, -58.3997, 'plazahoussay.jpg'),
+  gaumont: LUG('Cine Gaumont', 'Av. Rivadavia 1635', 'Congreso', -34.6091, -58.3912, 'gaumont.jpg'),
+  cacodelphia: LUG('Cine Arte Cacodelphia', '', 'Balvanera', -34.6075, -58.3990, 'cacodelphia.jpg'),
+  cosmos: LUG('Cine Cosmos UBA', 'Av. Corrientes 2046', 'Balvanera', -34.6044, -58.3975, 'cosmos.jpg'),
+  lorca: LUG('Cine Lorca', 'Av. Corrientes 1428', 'San Nicolás', -34.6041, -58.3871, 'lorca.jpg'),
+  monumental: LUG('Multiplex Monumental Lavalle', 'Lavalle 780', 'San Nicolás', -34.6022, -58.3790, 'monumental.jpg'),
+  atlasbullrich: LUG('Atlas Cines Patio Bullrich', 'Av. del Libertador 750', 'Retiro', -34.5871, -58.3802, 'atlasbullrich.jpg'),
+  cinemarkpuertomadero: LUG('Cinemark Puerto Madero', '', 'Puerto Madero', -34.6128, -58.3660, 'cinemarkpuertomadero.jpg'),
+  atlasalcorta: LUG('Atlas Cines Alcorta', 'Jerónimo Salguero 3172 (Alcorta Shopping)', 'Palermo', -34.5785, -58.4090, 'atlasalcorta.jpg'),
+  // --- Música ---
+  movistar: LUG('Movistar Arena', 'Humboldt 486', 'Chacarita', -34.5946, -58.4466, 'movistar.jpg'),
+  clubciudad: LUG('Club Ciudad de Buenos Aires', 'Av. del Libertador 7501', 'Núñez', -34.5370, -58.4535, 'clubciudad.jpg'),
+  sanisidro: LUG('Hipódromo de San Isidro', 'San Isidro (Gran Buenos Aires)', 'San Isidro', -34.4745, -58.5180, 'sanisidro.jpg')
+};
+
+// =====================================================================
+//  PLANES
+//  en: id del lugar | dias: 0=lunes ... 5=sábado, 6=domingo
+//  fechas: lista de días puntuales (año-mes-día)  | desde / hasta: rango (si no ponés nada: hoy hasta fin de 2027)
+//  precio: 0 es gratis | imagen: solo si el plan tiene foto propia (si no, usa la del lugar)
+//  Los planes de museos, teatros y cines son EJEMPLOS: reemplazalos por la cartelera real.
+// =====================================================================
+const EVENTOS = [
+  // ---------- MUSEOS ----------
+  { id: 'bellasartes-visita', en: 'bellasartes', titulo: 'Visita guiada a la colección', cat: 'arte', sub: 'Pintura', dias: [1, 2, 3, 4, 5, 6], dia: 'Mar a dom', hora: '12:30 y 16:30 h', ini: '12:30', precio: 0,
+    desc: 'Recorrido con guía por las salas de arte argentino y europeo.', etiquetas: ['Arte', 'Pintura', 'Gratis', 'Visita guiada'] },
+  { id: 'mariano-muestras', en: 'mariano', titulo: 'Muestras y actividades abiertas', cat: 'arte', sub: 'Muestras', dias: [1, 2, 3, 4, 5], dia: 'Mar a vie', hora: '14 a 20 h', ini: '14:00', precio: 0,
+    desc: 'Exposiciones y actividades culturales en el centro cultural de la Biblioteca Nacional.', etiquetas: ['Arte', 'Muestras', 'Gratis', 'Actividades'] },
+  { id: 'heredia-taller', en: 'casaheredia', titulo: 'Jornada de taller abierto', cat: 'arte', sub: 'Muestras', fechas: ['2026-11-21', '2026-12-19', '2027-03-20', '2027-05-15'], dia: 'Sáb 21 nov y más fechas', hora: '16 h', ini: '16:00', precio: 0,
+    desc: 'Los artistas en residencia abren su taller para mostrar lo que están creando.', etiquetas: ['Arte', 'Muestras', 'Gratis', 'Artistas'] },
+  { id: 'decorativo-palacio', en: 'decorativo', titulo: 'Visita al palacio y sus colecciones', cat: 'arte', sub: 'Diseño', dias: [2, 3, 4, 5, 6], dia: 'Mié a dom', hora: '14 a 19 h', ini: '14:00', precio: 2500,
+    desc: 'Una casona de época con muebles, tapices y objetos decorativos de distintos siglos.', etiquetas: ['Arte', 'Diseño', 'Historia', 'Visita guiada'] },
+  { id: 'popular-muestra', en: 'popular', titulo: 'Muestra de arte popular', cat: 'arte', sub: 'Muestras', dias: [2, 3, 4, 5, 6], dia: 'Mié a dom', hora: '12 a 19 h', ini: '12:00', precio: 1500,
+    desc: 'Platería, cerámica y textiles de distintas regiones del país.', etiquetas: ['Arte', 'Muestras', 'Tradición', 'Artesanías'] },
+  { id: 'malba-muestra', en: 'malba', titulo: 'Muestra de arte latinoamericano', cat: 'arte', sub: 'Muestras', dias: [0, 2, 3, 4, 5, 6], dia: 'Todos los días menos martes', hora: '12 a 19 h', ini: '12:00', precio: 12000, estreno: true,
+    desc: 'La colección permanente y muestras temporarias de artistas de toda América Latina.', etiquetas: ['Arte', 'Muestras', 'Latinoamérica', 'Colección'] },
+  { id: 'macba-geometrica', en: 'macba', titulo: 'Muestra de abstracción geométrica', cat: 'arte', sub: 'Pintura', dias: [0, 1, 2, 3, 4, 5], dia: 'Lun a sáb', hora: '12 a 19 h', ini: '12:00', precio: 5000,
+    desc: 'Obras de arte geométrico y cinético de artistas argentinos e internacionales.', etiquetas: ['Arte', 'Pintura', 'Geométrico', 'Contemporáneo'] },
+  { id: 'moderno-visita', en: 'moderno', titulo: 'Visita guiada al Museo Moderno', cat: 'arte', sub: 'Muestras', dias: [1, 2, 3, 4, 5, 6], dia: 'Mar a dom', hora: '11 a 19 h', ini: '11:00', precio: 5000,
+    desc: 'Recorrido por las muestras de arte moderno y contemporáneo del museo.', etiquetas: ['Arte', 'Muestras', 'Moderno', 'Visita guiada'] },
+  { id: 'xul-visita', en: 'xul', titulo: 'Visita al museo de Xul Solar', cat: 'arte', sub: 'Pintura', dias: [1, 2, 3, 4, 5], dia: 'Mar a vie', hora: '12 a 19 h', ini: '12:00', precio: 4000,
+    desc: 'La casa del artista, con sus pinturas, sus idiomas inventados y sus instrumentos.', etiquetas: ['Arte', 'Pintura', 'Xul Solar', 'Casa museo'] },
+  { id: 'fernandez-casa', en: 'fernandez', titulo: 'Visita a la casa-museo', cat: 'arte', sub: 'Muestras', dias: [2, 3, 4, 5, 6], dia: 'Mié a dom', hora: '14 a 19 h', ini: '14:00', precio: 1500,
+    desc: 'Un palacio neocolonial con arte hispanoamericano, platería y pintura religiosa.', etiquetas: ['Arte', 'Muestras', 'Historia', 'Arquitectura'] },
+  { id: 'caminito-paseo', en: 'caminito', titulo: 'Paseo por Caminito y sus artistas', cat: 'arte', sub: 'Pintura', dias: [0, 1, 2, 3, 4, 5, 6], dia: 'Todos los días', hora: '10 a 18 h', ini: '10:00', precio: 0,
+    desc: 'Casas de colores, pintores en la calle, tango y artesanías en el corazón de La Boca.', etiquetas: ['Arte', 'Pintura', 'Gratis', 'Al aire libre'] },
+  { id: 'evita-visita', en: 'evita', titulo: 'Visita guiada al Museo Evita', cat: 'arte', sub: 'Muestras', dias: [1, 2, 3, 4, 5, 6], dia: 'Mar a dom', hora: '11 a 19 h', ini: '11:00', precio: 6000,
+    desc: 'Objetos, vestidos y documentos para conocer la vida de Eva Perón.', etiquetas: ['Arte', 'Muestras', 'Historia', 'Visita guiada'] },
+  { id: 'maman-muestra', en: 'maman', titulo: 'Muestra en la galería', cat: 'arte', sub: 'Pintura', dias: [0, 1, 2, 3, 4, 5], dia: 'Lun a sáb', hora: '11 a 20 h', ini: '11:00', precio: 0,
+    desc: 'Pintura y escultura de artistas argentinos y latinoamericanos, con entrada libre.', etiquetas: ['Arte', 'Pintura', 'Gratis', 'Galería'] },
+
+  // ---------- TEATROS ----------
+  { id: 'colon-opera', en: 'colon', titulo: 'Función de ópera', cat: 'teatro', sub: 'Ópera', dias: [4, 5, 6], dia: 'Vie a dom', hora: '20 h', ini: '20:00', precio: 45000,
+    desc: 'La sala más importante del país, con orquesta, coro y escenografía en vivo.', etiquetas: ['Teatro', 'Ópera', 'Clásico', 'Gala'] },
+  { id: 'colon-sinfonico', en: 'colon', titulo: 'Concierto sinfónico', cat: 'musica', sub: 'Conciertos', fechas: ['2026-11-22', '2026-12-13', '2027-04-11', '2027-06-20'], dia: 'Dom 22 nov y más fechas', hora: '17 h', ini: '17:00', precio: 30000,
+    desc: 'Una orquesta sinfónica con obras clásicas en la acústica del Colón.', etiquetas: ['Música', 'Conciertos', 'Sinfónico', 'Clásica'] },
+  { id: 'cervantes-obra', en: 'cervantes', titulo: 'Obra de teatro nacional', cat: 'teatro', sub: 'Drama', dias: [3, 4, 5, 6], dia: 'Jue a dom', hora: '20 h', ini: '20:00', precio: 9000,
+    desc: 'Producciones del teatro nacional con elencos y directores argentinos.', etiquetas: ['Teatro', 'Drama', 'Nacional', 'Sala principal'] },
+  { id: 'laplaza-comedia', en: 'laplaza', titulo: 'Comedia en Paseo La Plaza', cat: 'teatro', sub: 'Comedia', dias: [3, 4, 5, 6], dia: 'Jue a dom', hora: '21 h', ini: '21:00', precio: 22000,
+    desc: 'Una comedia para pasar la noche en uno de los paseos teatrales de la Avenida Corrientes.', etiquetas: ['Teatro', 'Comedia', 'Corrientes', 'Noche'] },
+  { id: 'astral-musical', en: 'astral', titulo: 'Comedia musical', cat: 'teatro', sub: 'Musical', dias: [3, 4, 5, 6], dia: 'Jue a dom', hora: '20:30 h', ini: '20:30', precio: 28000,
+    desc: 'Canto, baile y orquesta en vivo en un clásico de la calle Corrientes.', etiquetas: ['Teatro', 'Musical', 'En vivo', 'Familiar'] },
+  { id: 'metropolitan-humor', en: 'metropolitan', titulo: 'Espectáculo de humor', cat: 'teatro', sub: 'Comedia', dias: [4, 5, 6], dia: 'Vie a dom', hora: '21 h', ini: '21:00', precio: 24000,
+    desc: 'Humor y sketches con actores y humoristas de la escena local.', etiquetas: ['Teatro', 'Comedia', 'Humor', '+13'] },
+  { id: 'lola-drama', en: 'lola', titulo: 'Obra de drama contemporáneo', cat: 'teatro', sub: 'Drama', dias: [4, 5, 6], dia: 'Vie a dom', hora: '20:30 h', ini: '20:30', precio: 25000,
+    desc: 'Una historia intensa con un elenco de primera línea.', etiquetas: ['Teatro', 'Drama', 'Contemporáneo', '+16'] },
+  { id: 'sanmartin-teatro', en: 'sanmartin', titulo: 'Teatro y danza en el San Martín', cat: 'teatro', sub: 'Drama', dias: [3, 4, 5, 6], dia: 'Jue a dom', hora: '20 h', ini: '20:00', precio: 8000,
+    desc: 'Obras, danza y espectáculos en uno de los complejos teatrales más grandes de la ciudad.', etiquetas: ['Teatro', 'Drama', 'Danza', 'Público'] },
+  { id: 'picadero-obra', en: 'picadero', titulo: 'Obra en el Picadero', cat: 'teatro', sub: 'Drama', dias: [4, 5, 6], dia: 'Vie a dom', hora: '21 h', ini: '21:00', precio: 20000,
+    desc: 'Teatro de autor en una sala con historia, a pasos de Corrientes.', etiquetas: ['Teatro', 'Drama', 'Autor', 'Sala'] },
+  { id: 'teatrobsas-comedia', en: 'teatrobsas', titulo: 'Comedia en el Teatro Buenos Aires', cat: 'teatro', sub: 'Comedia', dias: [4, 5, 6], dia: 'Vie a dom', hora: '20:30 h', ini: '20:30', precio: 18000,
+    desc: 'Una obra para reírse con un elenco de actores conocidos.', etiquetas: ['Teatro', 'Comedia', 'Humor', 'Noche'] },
+  { id: 'multiteatro-musical', en: 'multiteatro', titulo: 'Musical en el Multiteatro', cat: 'teatro', sub: 'Musical', dias: [3, 4, 5, 6], dia: 'Jue a dom', hora: '20 h', ini: '20:00', precio: 30000,
+    desc: 'Un gran musical con canciones en vivo y mucho movimiento.', etiquetas: ['Teatro', 'Musical', 'En vivo', 'Familiar'] },
+  { id: 'standupclub-noche', en: 'standupclub', titulo: 'Noche de stand up', cat: 'teatro', sub: 'Stand up', dias: [4, 5], dia: 'Vie y sáb', hora: '21 h', ini: '21:00', precio: 12000,
+    desc: 'Varios comediantes en una misma noche y humor para todos los gustos.', etiquetas: ['Teatro', 'Stand up', 'Humor', '+16'] },
+  { id: 'maipo-revista', en: 'maipo', titulo: 'Revista musical y tango', cat: 'teatro', sub: 'Musical', dias: [4, 5, 6], dia: 'Vie a dom', hora: '21 h', ini: '21:00', precio: 26000,
+    desc: 'Música, humor y baile en un teatro histórico de la ciudad.', etiquetas: ['Teatro', 'Musical', 'Tango', 'Clásico'] },
+
+  // ---------- CINES ----------
+  { id: 'cinepolisrecoleta-estrenos', en: 'cinepolisrecoleta', titulo: 'Estrenos de la semana', cat: 'cine', sub: 'Estrenos', dias: [0, 1, 2, 3, 4, 5, 6], dia: 'Todos los días', hora: '14 a 23 h', ini: '14:00', precio: 9000,
+    desc: 'Las películas que se estrenan esta semana, en varias funciones por día.', etiquetas: ['Cine', 'Estrenos', 'Cartelera', 'Shopping'] },
+  { id: 'cinemarkpalermo-estrenos', en: 'cinemarkpalermo', titulo: 'Estrenos de la semana', cat: 'cine', sub: 'Estrenos', dias: [0, 1, 2, 3, 4, 5, 6], dia: 'Todos los días', hora: '14 a 23 h', ini: '14:00', precio: 9000, estreno: true,
+    desc: 'Estrenos nacionales e internacionales, con funciones subtituladas y dobladas.', etiquetas: ['Cine', 'Estrenos', 'Cartelera', 'Shopping'] },
+  { id: 'cinemarkabasto-estrenos', en: 'cinemarkabasto', titulo: 'Estrenos de la semana', cat: 'cine', sub: 'Estrenos', dias: [0, 1, 2, 3, 4, 5, 6], dia: 'Todos los días', hora: '14 a 23 h', ini: '14:00', precio: 8500,
+    desc: 'Cartelera completa dentro del Abasto Shopping.', etiquetas: ['Cine', 'Estrenos', 'Cartelera', 'Shopping'] },
+  { id: 'showcasebelgrano-estrenos', en: 'showcasebelgrano', titulo: 'Estrenos de la semana', cat: 'cine', sub: 'Estrenos', dias: [0, 1, 2, 3, 4, 5, 6], dia: 'Todos los días', hora: '14 a 23 h', ini: '14:00', precio: 8500,
+    desc: 'Cine en Belgrano con los estrenos de la semana.', etiquetas: ['Cine', 'Estrenos', 'Cartelera', 'Belgrano'] },
+  { id: 'plazahoussay-estrenos', en: 'plazahoussay', titulo: 'Estrenos y preestrenos', cat: 'cine', sub: 'Estrenos', dias: [0, 1, 2, 3, 4, 5, 6], dia: 'Todos los días', hora: '14 a 23 h', ini: '14:00', precio: 8500,
+    desc: 'Estrenos y funciones especiales en el centro de la ciudad.', etiquetas: ['Cine', 'Estrenos', 'Preestrenos', 'Centro'] },
+  { id: 'gaumont-nacional', en: 'gaumont', titulo: 'Cine nacional en el Gaumont', cat: 'cine', sub: 'Clásicos', dias: [0, 1, 2, 3, 4, 5, 6], dia: 'Todos los días', hora: '14 a 22 h', ini: '14:00', precio: 3500,
+    desc: 'Películas argentinas, estrenos independientes y ciclos, a precio accesible.', etiquetas: ['Cine', 'Clásicos', 'Nacional', 'Accesible'] },
+  { id: 'cacodelphia-autor', en: 'cacodelphia', titulo: 'Ciclo de cine de autor', cat: 'cine', sub: 'Clásicos', dias: [3, 4, 5, 6], dia: 'Jue a dom', hora: '19 y 21 h', ini: '19:00', precio: 5000,
+    desc: 'Películas de culto y cine de autor en una sala chica.', etiquetas: ['Cine', 'Clásicos', 'Autor', 'Sala chica'] },
+  { id: 'cosmos-repertorio', en: 'cosmos', titulo: 'Ciclo de cine de repertorio', cat: 'cine', sub: 'Clásicos', dias: [0, 1, 2, 3, 4, 5, 6], dia: 'Todos los días', hora: '15 a 22 h', ini: '15:00', precio: 3000,
+    desc: 'Clásicos, cine independiente y ciclos temáticos en el cine de la Universidad.', etiquetas: ['Cine', 'Clásicos', 'Repertorio', 'Accesible'] },
+  { id: 'lorca-independiente', en: 'lorca', titulo: 'Ciclo de cine independiente', cat: 'cine', sub: 'Documental', dias: [3, 4, 5, 6], dia: 'Jue a dom', hora: '19 y 21 h', ini: '19:00', precio: 4000,
+    desc: 'Documentales y películas independientes de Argentina y el mundo.', etiquetas: ['Cine', 'Documental', 'Independiente', 'Ciclo'] },
+  { id: 'monumental-estrenos', en: 'monumental', titulo: 'Estrenos y preestrenos', cat: 'cine', sub: 'Estrenos', dias: [0, 1, 2, 3, 4, 5, 6], dia: 'Todos los días', hora: '14 a 23 h', ini: '14:00', precio: 7500,
+    desc: 'Cartelera comercial en pleno centro, a pasos de Lavalle.', etiquetas: ['Cine', 'Estrenos', 'Cartelera', 'Centro'] },
+  { id: 'atlasbullrich-estrenos', en: 'atlasbullrich', titulo: 'Estrenos de la semana', cat: 'cine', sub: 'Estrenos', dias: [0, 1, 2, 3, 4, 5, 6], dia: 'Todos los días', hora: '14 a 23 h', ini: '14:00', precio: 9500,
+    desc: 'Cine dentro del shopping con salas cómodas y estrenos.', etiquetas: ['Cine', 'Estrenos', 'Cartelera', 'Shopping'] },
+  { id: 'cinemarkpuertomadero-estrenos', en: 'cinemarkpuertomadero', titulo: 'Estrenos de la semana', cat: 'cine', sub: 'Estrenos', dias: [0, 1, 2, 3, 4, 5, 6], dia: 'Todos los días', hora: '14 a 23 h', ini: '14:00', precio: 9000,
+    desc: 'Estrenos y función nocturna frente a los diques de Puerto Madero.', etiquetas: ['Cine', 'Estrenos', 'Cartelera', 'Puerto Madero'] },
+  { id: 'atlasalcorta-animacion', en: 'atlasalcorta', titulo: 'Cine de animación para toda la familia', cat: 'cine', sub: 'Animación', dias: [5, 6], dia: 'Sáb y dom', hora: '14 a 18 h', ini: '14:00', precio: 8000,
+    desc: 'Películas animadas para ir con chicos y grandes durante el fin de semana.', etiquetas: ['Cine', 'Animación', 'Familiar', 'Finde'] },
+
+  // ---------- MÚSICA ----------
+  { id: 'bunbury', en: 'movistar', titulo: 'Enrique Bunbury en el Movistar Arena', cat: 'musica', sub: 'Conciertos', fechas: ['2026-11-04'], dia: 'Mié 4 nov', hora: '21 h', ini: '21:00', precio: 65000, estreno: true,
+    desc: 'Concierto del cantautor español en el Movistar Arena. Confirmá fecha y horario con la ticketera.', etiquetas: ['Música', 'Conciertos', 'Rock', 'En vivo'] },
+  { id: 'rush', en: 'movistar', titulo: 'Rush en el Movistar Arena', cat: 'musica', sub: 'Conciertos', fechas: ['2027-01-15'], dia: 'Vie 15 ene', hora: '21 h', ini: '21:00', precio: 90000,
+    desc: 'Show en el Movistar Arena. Confirmá fecha y horario con la ticketera.', etiquetas: ['Música', 'Conciertos', 'Rock', 'En vivo'] },
+  { id: 'tomlinson', en: 'movistar', titulo: 'Louis Tomlinson en el Movistar Arena', cat: 'musica', sub: 'Conciertos', fechas: ['2027-04-02'], dia: 'Vie 2 abr', hora: '21 h', ini: '21:00', precio: 80000,
+    desc: 'Show en el Movistar Arena. Confirmá fecha y horario con la ticketera.', etiquetas: ['Música', 'Conciertos', 'Pop', 'En vivo'] },
+  { id: 'primavera', en: 'clubciudad', titulo: 'Primavera Sound Buenos Aires', cat: 'musica', sub: 'Festivales', fechas: ['2026-11-28', '2026-11-29'], dia: 'Sáb 28 y dom 29 nov', hora: 'Desde la tarde', ini: '15:00', precio: 185000, estreno: true, imagen: 'primavera.jpg',
+    desc: 'Festival de dos días con Gorillaz, The Strokes, FKA twigs y muchos más.', etiquetas: ['Música', 'Festivales', 'Gorillaz', 'The Strokes'] },
+  { id: 'lolla', en: 'sanisidro', titulo: 'Lollapalooza Argentina', cat: 'musica', sub: 'Festivales', fechas: ['2027-03-12', '2027-03-13', '2027-03-14'], dia: 'Vie 12 a dom 14 mar', hora: 'Desde el mediodía', ini: '12:00', precio: 350000, estreno: true, imagen: 'lollapalooza.jpg',
+    desc: 'Tres días de música, arte y gastronomía en el Hipódromo de San Isidro. El precio varía según la etapa de venta.', etiquetas: ['Música', 'Festivales', '3 días', 'San Isidro'] }
 ];
 
-// ico: nombre del ícono (los nombres están en la función icono)
+// =====================================================================
+//  FECHAS (funciones para trabajar con días)
+// =====================================================================
+function iso(d) { return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+function hoyDate() { const d = new Date(); d.setHours(0, 0, 0, 0); return d; }
+function sumarDias(d, n) { const r = new Date(d); r.setDate(r.getDate() + n); return r; }
+function hoyIdx() { return (new Date().getDay() + 6) % 7; }
+function ocurre(e, d) {
+  const s = iso(d);
+  if (e.fechas) return e.fechas.includes(s);
+  return s >= e.desde && s <= e.hasta && e.dias.includes((d.getDay() + 6) % 7);
+}
+function proximaFecha(e) {
+  let d = hoyDate();
+  for (let i = 0; i < 500; i++) { if (ocurre(e, d)) return d; d = sumarDias(d, 1); }
+  return null;
+}
+
+// Une cada plan con los datos de su lugar y descarta los que ya pasaron
+const eventos = EVENTOS.map(e => {
+  const lu = LUGARES[e.en];
+  return { ...e, lugar: lu.nombre, dir: lu.dir, zona: lu.zona, lat: lu.lat, lng: lu.lng,
+    imagen: e.imagen || lu.imagen, desde: e.desde || '2026-11-02', hasta: e.hasta || '2027-12-31' };
+}).map(e => ({ ...e, prox: proximaFecha(e) })).filter(e => e.prox);
+
+// ===== NOTIFICACIONES (de ejemplo) =====
 const notifs = [
-  { id: 'n1', grupo: 'Hoy', tipo: 'recordatorio', ico: 'Notificaciones', color: '#631100', t: 'Empieza en 2 horas', s: 'Noche de impro · 21 h' },
-  { id: 'n2', grupo: 'Hoy', tipo: 'novedad', ico: 'Grilla', color: '#002B49', t: 'Nuevo estreno afín a vos', s: 'Ciclo de cine · Almagro' },
-  { id: 'n3', grupo: 'Hoy', tipo: 'aviso', ico: 'Favoritos', color: '#B52000', t: 'Se agotan las entradas', s: 'Stand up · Sáb 20 h' },
-  { id: 'n4', grupo: 'Antes', tipo: 'recordatorio', ico: 'Calendario', color: '#53779A', t: 'Agendaste una muestra', s: 'Feria de arte · Sáb 15 h' },
-  { id: 'n5', grupo: 'Antes', tipo: 'novedad', ico: 'Ubicacion', color: '#002B49', t: 'Plan nuevo en Palermo', s: 'Feria de diseño · Dom 15 h' },
-  { id: 'n6', grupo: 'Antes', tipo: 'compartido', ico: 'Compartir', color: '#631100', t: 'Cami te compartió un plan', s: 'Concierto íntimo' }
+  { id: 'n1', grupo: 'Hoy', tipo: 'recordatorio', ico: 'Notificaciones', color: '#631100', t: 'Empieza en 2 horas', s: 'Noche de stand up · 21 h' },
+  { id: 'n2', grupo: 'Hoy', tipo: 'novedad', ico: 'Grilla', color: '#002B49', t: 'Nuevo estreno afín a vos', s: 'Estrenos de la semana · Cinemark Palermo' },
+  { id: 'n3', grupo: 'Hoy', tipo: 'aviso', ico: 'Favoritos', color: '#B52000', t: 'Se agotan las entradas', s: 'Primavera Sound · Sáb 28 nov' },
+  { id: 'n4', grupo: 'Antes', tipo: 'recordatorio', ico: 'Calendario', color: '#53779A', t: 'Agendaste una muestra', s: 'MALBA · Muestra latinoamericana' },
+  { id: 'n5', grupo: 'Antes', tipo: 'novedad', ico: 'Ubicacion', color: '#002B49', t: 'Plan nuevo en Palermo', s: 'Museo Evita · Visita guiada' },
+  { id: 'n6', grupo: 'Antes', tipo: 'compartido', ico: 'Compartir', color: '#631100', t: 'Cami te compartió un plan', s: 'Lollapalooza · 12 de marzo' }
 ];
 
-// Preguntas frecuentes (pantalla de Ayuda)
+// ===== AYUDA Y TÉRMINOS =====
 const FAQ = [
   ['¿Cómo guardo un plan en mi agenda?', 'Entrá al plan que te interesa y tocá "Guardar en mi agenda". Después lo ves en la pestaña Agenda, en el día que corresponde.'],
   ['¿Cómo cambio mis intereses?', 'Andá a Perfil y tocá "Editar" al lado de "Mis intereses". Ahí podés elegir otras categorías y subcategorías.'],
   ['¿Por qué me piden mi ubicación?', 'Para mostrarte qué planes hay cerca tuyo y ordenarlos por distancia. Es opcional, no la guardamos y no la compartimos con nadie.'],
-  ['¿Los planes son solo en Buenos Aires?', 'Sí, por ahora todos los planes son en la Ciudad de Buenos Aires.'],
+  ['¿Los planes son solo en Buenos Aires?', 'Casi todos son en la Ciudad de Buenos Aires. Algunos festivales grandes pueden hacerse en el Gran Buenos Aires y se indica en el plan.'],
   ['¿Cuesta usar Afín?', 'No, Afín es gratis. El precio que ves en cada plan es el de la entrada, y lo define cada lugar.'],
-  ['¿Cómo comparto un plan con mis amigos?', 'Dentro del plan, tocá el botón de compartir. Podés mandarlo por WhatsApp, Instagram, mensaje o copiar el link.']
+  ['¿Cómo llego a un plan?', 'Dentro del plan, tocá "Cómo llegar" y se abre el mapa con la dirección del lugar.']
 ];
-
-// Términos y privacidad (texto base: revisalo y ajustalo cuando la app se publique)
 const TERMINOS = [
   ['Qué es Afín', 'Afín es una app que te ayuda a descubrir propuestas culturales (teatro, cine, arte y música) en la Ciudad de Buenos Aires, según tus intereses.'],
   ['Uso de la app', 'Podés usar Afín gratis. La información de cada plan (horarios, precios y lugares) la carga cada espacio y puede cambiar, por eso te recomendamos confirmarla antes de ir.'],
@@ -79,25 +219,27 @@ const TERMINOS = [
   ['Cambios y contacto', 'Si actualizamos estos términos, vas a ver la fecha nueva arriba. Si tenés dudas, escribinos a hola@afin.app.']
 ];
 
-// ===== ESTADO: lo que el usuario va eligiendo =====
-// Usuario que ingresó (se guarda en el navegador)
+// =====================================================================
+//  ESTADO: lo que la persona va eligiendo
+// =====================================================================
 let usuario = null;
 try { usuario = JSON.parse(localStorage.getItem('afin_usuario')); } catch (e) {}
 
 // Ubicación de la persona (solo si da permiso; no se guarda en ningún lado)
 let miUbic = null, ubicEstado = 'no'; // 'no' | 'pidiendo' | 'ok' | 'negado' | 'error'
+let mapaObj = null;
 
 let pantalla = 'splash', pila = [];
 let gustos = [], subsElegidas = [], abierta = null, filtro = 'todo', faqAbierta = null;
 let eventoActual = null, menuAbierto = false, compartirItem = null, copiado = false, modalListo = false;
-let favoritos = [], agenda = [], hechos = [], diaSel = hoyIdx(), favFiltro = 'todo';
-let q = '', chipExp = 'todo', fCats = [], fFecha = null, fDist = 20, fPrecio = 20000, orden = 'cerca';
+let favoritos = [], agenda = [], hechos = [], diaSel = hoyIdx(), semOff = 0, favFiltro = 'todo';
+let q = '', chipExp = 'todo', fCats = [], fFecha = null, fDist = 20, fPrecio = 200000, orden = 'cerca';
 let notifFiltro = 'todas', notifLeidas = [], recordar = true;
 
+const PRECIO_MAX = 200000;
 const app = document.getElementById('app');
 
 // ===== FUNCIONES ÚTILES =====
-function hoyIdx() { return (new Date().getDay() + 6) % 7; }
 function alternar(lista, x) { return lista.includes(x) ? lista.filter(i => i !== x) : [...lista, x]; }
 function buscar(id) { return eventos.find(e => e.id === id); }
 function catDe(id) { return categorias.find(c => c.id === id); }
@@ -113,15 +255,14 @@ function pedirUbicacion() {
     { enableHighAccuracy: false, timeout: 10000, maximumAge: 300000 }
   );
 }
-// Distancia real en km entre la persona y el evento (null si no hay ubicación)
-function kmA(e) {
-  if (!miUbic) return null;
+function kmEntre(lat1, lng1, lat2, lng2) {
   const R = 6371, rad = x => x * Math.PI / 180;
-  const dLat = rad(e.lat - miUbic.lat), dLng = rad(e.lng - miUbic.lng);
-  const a = Math.sin(dLat / 2) ** 2 + Math.cos(rad(miUbic.lat)) * Math.cos(rad(e.lat)) * Math.sin(dLng / 2) ** 2;
+  const dLat = rad(lat2 - lat1), dLng = rad(lng2 - lng1);
+  const a = Math.sin(dLat / 2) ** 2 + Math.cos(rad(lat1)) * Math.cos(rad(lat2)) * Math.sin(dLng / 2) ** 2;
   return 2 * R * Math.asin(Math.sqrt(a));
 }
-// Texto de distancia ("a 850 m", "a 3,2 km"); vacío si no hay ubicación
+// Distancia real entre la persona y el plan (null si no hay ubicación)
+function kmA(e) { return miUbic ? kmEntre(miUbic.lat, miUbic.lng, e.lat, e.lng) : null; }
 function distTxt(e) {
   const k = kmA(e);
   if (k === null) return '';
@@ -159,7 +300,15 @@ function guardarAgenda(id) {
   else { agenda.push(id); modalListo = true; }
   dibujar();
 }
-function verAgenda() { modalListo = false; diaSel = buscar(eventoActual).dias[0]; irTab('agenda'); }
+// Lleva a la agenda en la semana y el día del próximo encuentro del plan
+function verAgenda() {
+  modalListo = false;
+  const f = buscar(eventoActual).prox, lunActual = sumarDias(hoyDate(), -hoyIdx());
+  const dias = Math.round((f - lunActual) / 86400000);
+  semOff = Math.floor(dias / 7); diaSel = dias - 7 * semOff;
+  irTab('agenda');
+}
+function cambiarSemana(n) { semOff = Math.max(0, semOff + n); dibujar(); }
 
 function abrirCompartir(id) {
   if (id === 'afin') compartirItem = { id: 'afin', titulo: 'Afín', sub: 'Cultura cerca tuyo', e: null };
@@ -176,7 +325,6 @@ function copiarLink() {
 function logoImg(clase) {
   return `<img class="logo-img ${clase || ''}" src="img/logo.png" alt="Afín" onerror="this.outerHTML='<span class=logo>Afín</span>'">`;
 }
-
 // Protege el texto que escribe la persona
 function esc(s) {
   return String(s || '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -204,7 +352,8 @@ function icono(n, lleno) {
     'Ayuda': '<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 1-1 1.7M12 17v.5"/>',
     'Salir': '<path d="M10 4H5v16h5M15 8l4 4-4 4M19 12H9"/>',
     'Documento': '<path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/>',
-    'Play': '<path d="M8 5l11 7-11 7z"/>'
+    'Play': '<path d="M8 5l11 7-11 7z"/>',
+    'Ruta': '<path d="M3 11l18-8-8 18-2-8z"/>'
   }[n] || '';
   return `<svg class="svg-ico" viewBox="0 0 24 24" fill="${lleno ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
 }
@@ -224,11 +373,11 @@ function cerrarSesion() {
   dibujar();
 }
 
-// Foto del evento; si todavía no hay (o no se encuentra), muestra un bloque del color de su categoría
+// Foto del plan; si todavía no hay (o no se encuentra), muestra un bloque del color de su categoría
 function foto(e, clase) {
   const bloque = `<div class="foto vacio ${clase}" style="background:${catDe(e.cat).color}"></div>`;
   return e.imagen
-    ? `<img class="foto ${clase}" src="img/${e.imagen}" alt="${e.titulo}" onerror="this.outerHTML=this.dataset.f" data-f='${bloque}'>`
+    ? `<img class="foto ${clase}" src="img/${e.imagen}" alt="${esc(e.titulo)}" onerror="this.outerHTML=this.dataset.f" data-f='${bloque}'>`
     : bloque;
 }
 
@@ -259,6 +408,8 @@ function dibujar() {
   if (menuAbierto) h += vistaMenu();
   if (compartirItem) h += vistaCompartir();
   app.innerHTML = h;
+  if (pantalla === 'explorar') iniciarMapa();
+  else if (mapaObj) { mapaObj.remove(); mapaObj = null; }
 }
 
 // ===== SPLASH =====
@@ -314,19 +465,33 @@ function vistaEditar() {
   </div>`;
 }
 
-// ===== PASO 3: VIDEO "ASÍ FUNCIONA AFÍN" =====
-// El video va en la carpeta video con el nombre intro.mp4 (y opcional portada.jpg)
+// ===== PASO 3: VIDEO A PANTALLA COMPLETA (video/intro.mp4 y opcional video/portada.jpg) =====
+function alternarPlay() {
+  const v = document.getElementById('vid');
+  if (v) v.paused ? v.play() : v.pause();
+}
+function alternarSonido(btn) {
+  const v = document.getElementById('vid');
+  if (!v) return;
+  v.muted = !v.muted;
+  btn.textContent = v.muted ? 'Activar sonido' : 'Silenciar';
+}
 function vistaVideo() {
   const falta = `<div class="video-falta"><div class="play-g">${icono('Play', true)}</div><p>Acá va el video de Afín</p></div>`;
-  const pasos = [['Favoritos', 'Elegí lo que te gusta'], ['Explorar', 'Descubrí planes en Buenos Aires'], ['Compartir', 'Guardá y compartí con tus amigos']]
-    .map(([i, t]) => `<div class="paso-v"><div class="paso-ico">${icono(i)}</div><span>${t}</span></div>`).join('');
-  return `<div class="pantalla">
-    <div class="progreso"><div class="on"></div><div class="on"></div><div class="on"></div></div>
-    <div class="top"><button class="atras" onclick="atras()">‹</button><button class="omitir" onclick="irTab('inicio')">Omitir</button></div>
-    <h2 style="margin:20px 0 14px">Así funciona Afín</h2>
-    <div class="video-box"><video controls playsinline preload="metadata" poster="video/portada.jpg" data-f='${falta}'><source src="video/intro.mp4" type="video/mp4" onerror="this.parentNode.outerHTML=this.parentNode.dataset.f"></video></div>
-    ${pasos}
-    <button class="continuar" onclick="irTab('inicio')">Empezar</button>
+  return `<div class="pantalla video-full">
+    <video id="vid" src="video/intro.mp4" poster="video/portada.jpg" autoplay muted playsinline
+      onclick="alternarPlay()" onpause="document.getElementById('playbig').classList.remove('oculto')"
+      onplay="document.getElementById('playbig').classList.add('oculto')"
+      onerror="this.outerHTML=this.dataset.f" data-f='${falta}'></video>
+    <div id="playbig" class="play-big oculto">${icono('Play', true)}</div>
+    <div class="vf-top">
+      <div class="progreso"><div class="on"></div><div class="on"></div><div class="on"></div></div>
+      <div class="top"><button class="atras" onclick="atras()">‹</button><button class="omitir" onclick="irTab('inicio')">Omitir</button></div>
+    </div>
+    <div class="vf-bottom">
+      <button class="btn-sonido" onclick="alternarSonido(this)">Activar sonido</button>
+      <button class="continuar" onclick="irTab('inicio')">Empezar</button>
+    </div>
   </div>`;
 }
 
@@ -335,12 +500,13 @@ function vistaInicio() {
   const lista = gustos.length ? categorias.filter(c => gustos.includes(c.id)) : categorias;
   const chips = [['todo', 'Todo'], ...lista.map(c => [c.id, c.nombre])]
     .map(([id, n]) => `<button class="chip ${filtro === id ? 'on' : ''}" onclick="filtro='${id}'; dibujar()">${n}</button>`).join('');
-  const vis = eventos.filter(e => filtro === 'todo' || e.cat === filtro);
+  const base = eventos.filter(e => !gustos.length || gustos.includes(e.cat));
+  const vis = base.filter(e => filtro === 'todo' || e.cat === filtro).sort((a, b) => a.prox - b.prox).slice(0, 12);
   const grandes = vis.length ? vis.map(e =>
-    `<div class="ev-grande" onclick="abrirEvento('${e.id}')">${foto(e, 'grande')}<b>${e.titulo}</b><span>${e.dia} · ${e.hora}</span></div>`).join('')
-    : `<p class="vacio-msg">Todavía no hay eventos de esta categoría.</p>`;
-  const nuevos = eventos.filter(e => e.estreno).slice(0, 2).map(e =>
-    `<div onclick="abrirEvento('${e.id}')">${foto(e, 'chica')}<b class="nombre-chico">${e.titulo}</b></div>`).join('');
+    `<div class="ev-grande" onclick="abrirEvento('${e.id}')">${foto(e, 'grande')}<b>${esc(e.titulo)}</b><span>${e.dia} · ${e.hora}</span></div>`).join('')
+    : `<p class="vacio-msg">Todavía no hay planes de esta categoría.</p>`;
+  const nuevos = eventos.filter(e => e.estreno).sort((a, b) => a.prox - b.prox).slice(0, 2).map(e =>
+    `<div onclick="abrirEvento('${e.id}')">${foto(e, 'chica')}<b class="nombre-chico">${esc(e.titulo)}</b></div>`).join('');
   return `<div class="pantalla inicio">
     <div class="contenido">
       <div class="header">${logoImg('l-header')}<button class="menu" onclick="abrirMenu()">≡</button></div>
@@ -356,30 +522,34 @@ function vistaInicio() {
 
 // ===== ESTRENOS Y NOVEDADES =====
 function vistaEstrenos() {
-  const lista = eventos.filter(e => e.estreno);
+  const lista = eventos.filter(e => e.estreno).sort((a, b) => a.prox - b.prox);
+  if (!lista.length) return `<div class="pantalla">${cab('Estrenos')}<p class="vacio-msg">Todavía no hay estrenos.</p></div>`;
   const filas = lista.map(e =>
     `<div class="fila" onclick="abrirEvento('${e.id}')">${foto(e, 'mini')}
-      <div class="fila-texto"><b>${e.titulo}</b><span>${e.dia} · ${e.hora} · ${subDist(e)}</span></div>
+      <div class="fila-texto"><b>${esc(e.titulo)}</b><span>${e.dia} · ${subDist(e)}</span></div>
       <button class="corazon" onclick="alternarFav('${e.id}', event)">${icono('Favoritos', favoritos.includes(e.id))}</button></div>`).join('');
   return `<div class="pantalla">${cab('Estrenos')}<div class="scroll">${foto(lista[0], 'portada')}<div class="lista-est">${filas}</div></div></div>`;
 }
 
-// ===== DETALLE DEL EVENTO =====
+// ===== DETALLE DEL PLAN =====
 function vistaEvento() {
   const e = buscar(eventoActual), guardado = agenda.includes(e.id);
   const etiquetas = e.etiquetas.map((t, i) => `<span class="etiqueta ${i === 0 ? 'on' : ''}">${t}</span>`).join('');
+  const mapsUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(e.lugar + ', ' + (e.dir ? e.dir + ', ' : '') + 'Buenos Aires, Argentina');
+  const donde = [e.dir, e.zona, distTxt(e)].filter(Boolean).join(' · ');
   return `<div class="pantalla evento">
     <div class="evento-scroll">
       <button class="atras rojo" onclick="atras()">‹</button>
       <div class="portada-wrap">${foto(e, 'portada')}<button class="corazon-flot" onclick="alternarFav('${e.id}', event)">${icono('Favoritos', favoritos.includes(e.id))}</button></div>
-      <h1 class="serif titulo-ev">${e.titulo}</h1>
+      <h1 class="serif titulo-ev">${esc(e.titulo)}</h1>
       <div class="etiquetas">${etiquetas}</div>
       <div class="datos">
         <div class="dato"><div class="dato-ico">${icono('Calendario')}</div><div><b>${e.dia}</b><span>${e.hora}</span></div></div>
-        <div class="dato"><div class="dato-ico">${icono('Ubicacion')}</div><div><b>${e.lugar}</b><span>${e.zona}${distTxt(e) ? ' · ' + distTxt(e) : ''}</span></div></div>
+        <div class="dato"><div class="dato-ico">${icono('Ubicacion')}</div><div><b>${e.lugar}</b><span>${donde}</span></div></div>
         <div class="dato"><div class="dato-ico">${icono('Entrada')}</div><div><b>${precioTxt(e)}</b><span>Entrada</span></div></div>
       </div>
       <p class="descripcion">${e.desc}</p>
+      <a class="btn-ir" href="${mapsUrl}" target="_blank" rel="noopener">${icono('Ruta')}Cómo llegar</a>
     </div>
     <div class="barra-ev">
       <button class="guardar ${guardado ? 'listo' : ''}" onclick="guardarAgenda('${e.id}')">${guardado ? 'Guardado en tu agenda' : 'Guardar en mi agenda'}</button>
@@ -388,24 +558,41 @@ function vistaEvento() {
   </div>`;
 }
 
-// ===== EXPLORAR (ubicación) =====
-function mapa() {
-  const pins = [[62, 40], [255, 80], [185, 105], [112, 145]].map(([x, y]) =>
-    `<path transform="translate(${x} ${y})" d="M0 0c-9 0-14 7-14 14 0 10 14 24 14 24s14-14 14-24c0-7-5-14-14-14z" fill="#B52000"/>`).join('');
-  const yo = miUbic ? `<circle cx="165" cy="190" r="14" fill="#9FB1BB"/><circle cx="165" cy="190" r="7" fill="#002B49" stroke="#fff" stroke-width="2"/>` : '';
-  return `<svg class="mapa" viewBox="0 0 360 250"><rect width="360" height="250" fill="#EFE8D6"/>
-    <rect x="215" y="12" width="70" height="60" fill="#B7C1C2"/>
-    <path d="M0 175 Q90 150 160 185 T360 165 L360 205 Q250 230 170 218 T0 220Z" fill="#9FB1BB"/>
-    <g stroke="#fff" stroke-width="10" fill="none"><path d="M60 0V250M215 0V250M0 78H360M0 140H360M10 240L360 70"/></g>
-    ${pins}${yo}</svg>`;
+// ===== EXPLORAR (mapa real) =====
+function iniciarMapa() {
+  const el = document.getElementById('mapa');
+  if (!el) return;
+  if (typeof L === 'undefined') { el.innerHTML = '<div class="mapa-error">No se pudo cargar el mapa. Revisá tu conexión a internet.</div>'; return; }
+  if (mapaObj) { mapaObj.remove(); mapaObj = null; }
+  mapaObj = L.map(el).setView([-34.6037, -58.3816], 12);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '© OpenStreetMap' }).addTo(mapaObj);
+
+  const vis = eventos.filter(e => chipExp === 'todo' || e.cat === chipExp);
+  const porLugar = {};
+  vis.forEach(e => { (porLugar[e.en] = porLugar[e.en] || []).push(e); });
+  const puntos = [];
+  Object.keys(porLugar).forEach(id => {
+    const lu = LUGARES[id], evs = porLugar[id];
+    const icon = L.divIcon({ className: '', html: `<div class="pin" style="background:${catDe(evs[0].cat).color}"></div>`, iconSize: [22, 22], iconAnchor: [11, 22], popupAnchor: [0, -22] });
+    const html = `<b>${lu.nombre}</b><br><small>${lu.dir ? lu.dir + ' · ' : ''}${lu.zona}</small>` +
+      evs.slice(0, 3).map(e => `<a class="pop-ev" onclick="abrirEvento('${e.id}')">${esc(e.titulo)}</a>`).join('');
+    L.marker([lu.lat, lu.lng], { icon }).addTo(mapaObj).bindPopup(html);
+    puntos.push([lu.lat, lu.lng]);
+  });
+  // La persona se marca en el mapa, y se incluye en el zoom solo si está cerca de la ciudad
+  if (miUbic) {
+    L.circleMarker([miUbic.lat, miUbic.lng], { radius: 8, color: '#fff', weight: 3, fillColor: '#002B49', fillOpacity: 1 }).addTo(mapaObj);
+    if (kmEntre(miUbic.lat, miUbic.lng, -34.6037, -58.3816) < 40) puntos.push([miUbic.lat, miUbic.lng]);
+  }
+  if (puntos.length) mapaObj.fitBounds(puntos, { padding: [26, 26], maxZoom: 15 });
 }
 function vistaExplorar() {
   let lista = eventos.filter(e => chipExp === 'todo' || e.cat === chipExp);
-  if (miUbic) lista = lista.sort((a, b) => kmA(a) - kmA(b));
-  const filas = lista.map(e => `<div class="fila" onclick="abrirEvento('${e.id}')">${foto(e, 'mini')}<div class="fila-texto"><b>${e.titulo}</b><span>${subDist(e)}</span></div></div>`).join('');
+  lista = miUbic ? lista.sort((a, b) => kmA(a) - kmA(b)) : lista.sort((a, b) => a.prox - b.prox);
+  const filas = lista.slice(0, 12).map(e => `<div class="fila" onclick="abrirEvento('${e.id}')">${foto(e, 'mini')}<div class="fila-texto"><b>${esc(e.titulo)}</b><span>${e.lugar} · ${subDist(e)}</span></div></div>`).join('');
   return `<div class="pantalla sinpad"><div class="cuerpo">
     <div class="buscar-fila">${buscador()}<button class="atras rojo" onclick="ir('filtro')">☰</button></div>
-    ${mapa()}
+    <div id="mapa" class="mapa"></div>
     ${avisoUbic()}
     <div class="chips2">${chipsCat(chipExp, 'chipExp', true)}</div>
     <div class="seccion2"><b>${miUbic ? 'Cerca tuyo' : 'Planes en Buenos Aires'}</b><span onclick="ir('resultados')">Ver lista</span></div>
@@ -415,8 +602,15 @@ function vistaExplorar() {
 
 // ===== FILTRO =====
 function txtDist() { return fDist >= 20 ? 'Cualquiera' : 'Hasta ' + fDist + ' km'; }
-function txtPrecio() { return fPrecio >= 20000 ? 'Cualquiera' : fPrecio === 0 ? 'Gratis' : 'Hasta $' + fPrecio.toLocaleString('es-AR'); }
+function txtPrecio() { return fPrecio >= PRECIO_MAX ? 'Cualquiera' : fPrecio === 0 ? 'Gratis' : 'Hasta $' + fPrecio.toLocaleString('es-AR'); }
 const FECHAS = [['hoy', 'Hoy'], ['manana', 'Mañana'], ['finde', 'Finde'], ['semana', 'Semana']];
+function fechasFiltro(f) {
+  const h = hoyDate(), dow = hoyIdx();
+  if (f === 'hoy') return [h];
+  if (f === 'manana') return [sumarDias(h, 1)];
+  if (f === 'finde') { const s = dow === 6 ? -1 : 5 - dow; return [sumarDias(h, s), sumarDias(h, s + 1)].filter(d => d >= h); }
+  return [0, 1, 2, 3, 4, 5, 6].map(i => sumarDias(h, i));
+}
 function vistaFiltro() {
   const cats = categorias.map(c => `<button class="chip2 ${fCats.includes(c.id) ? 'on' : ''}" onclick="fCats=alternar(fCats,'${c.id}');dibujar()">${c.nombre}</button>`).join('');
   const fechas = FECHAS.map(([id, n]) => `<button class="chip2 ${fFecha === id ? 'on' : ''}" onclick="fFecha=(fFecha==='${id}'?null:'${id}');dibujar()">${n}</button>`).join('');
@@ -430,9 +624,9 @@ function vistaFiltro() {
     <div class="filtro-t">Fecha</div><div class="chips-fila">${fechas}</div>
     ${dist}
     <div class="filtro-t">Precio <span class="lb" id="lbPrecio">${txtPrecio()}</span></div>
-    <input type="range" min="0" max="20000" step="500" value="${fPrecio}" oninput="fPrecio=+this.value;document.getElementById('lbPrecio').textContent=txtPrecio()">
+    <input type="range" min="0" max="${PRECIO_MAX}" step="5000" value="${fPrecio}" oninput="fPrecio=+this.value;document.getElementById('lbPrecio').textContent=txtPrecio()">
     <div class="botones-fin">
-      <button class="btn-lim" onclick="fCats=[];fFecha=null;fDist=20;fPrecio=20000;q='';dibujar()">Limpiar</button>
+      <button class="btn-lim" onclick="fCats=[];fFecha=null;fDist=20;fPrecio=${PRECIO_MAX};q='';dibujar()">Limpiar</button>
       <button class="btn-ver" onclick="ir('resultados')">Ver</button>
     </div>
   </div>`;
@@ -440,23 +634,23 @@ function vistaFiltro() {
 
 // ===== RESULTADOS DEL FILTRO =====
 function filtrar() {
-  const h = hoyIdx(), set = { hoy: [h], manana: [(h + 1) % 7], finde: [5, 6], semana: [0, 1, 2, 3, 4, 5, 6] };
   const palabras = q.trim().toLowerCase().split(/\s+/).filter(Boolean);
+  const fechasSel = fFecha ? fechasFiltro(fFecha) : null;
   const r = eventos.filter(e => {
-    const txt = (e.titulo + ' ' + catDe(e.cat).nombre + ' ' + e.sub + ' ' + e.zona).toLowerCase();
+    const txt = (e.titulo + ' ' + catDe(e.cat).nombre + ' ' + e.sub + ' ' + e.zona + ' ' + e.lugar).toLowerCase();
     return palabras.every(p => txt.includes(p) || ['en', 'de', 'el', 'la', 'cerca', 'tuyo'].includes(p))
       && (!fCats.length || fCats.includes(e.cat))
-      && (!fFecha || e.dias.some(d => set[fFecha].includes(d)))
+      && (!fechasSel || fechasSel.some(d => ocurre(e, d)))
       && (!miUbic || fDist >= 20 || kmA(e) <= fDist)
       && e.precio <= fPrecio;
   });
-  return r.sort(orden === 'cerca' && miUbic ? (a, b) => kmA(a) - kmA(b) : (a, b) => a.dias[0] - b.dias[0]);
+  return r.sort(orden === 'cerca' && miUbic ? (a, b) => kmA(a) - kmA(b) : (a, b) => a.prox - b.prox);
 }
 function quitar(k) {
   if (k.startsWith('cat:')) fCats = fCats.filter(x => x !== k.slice(4));
   if (k === 'fecha') fFecha = null;
   if (k === 'dist') fDist = 20;
-  if (k === 'precio') fPrecio = 20000;
+  if (k === 'precio') fPrecio = PRECIO_MAX;
   dibujar();
 }
 function vistaResultados() {
@@ -464,9 +658,9 @@ function vistaResultados() {
   const act = [...fCats.map(id => ['cat:' + id, catDe(id).nombre]),
     ...(fFecha ? [['fecha', FECHAS.find(f => f[0] === fFecha)[1]]] : []),
     ...(miUbic && fDist < 20 ? [['dist', fDist + ' km']] : []),
-    ...(fPrecio < 20000 ? [['precio', txtPrecio()]] : [])];
+    ...(fPrecio < PRECIO_MAX ? [['precio', txtPrecio()]] : [])];
   const chips = act.map(([k, n]) => `<button class="chip2 on" onclick="quitar('${k}')">${n}</button>`).join('');
-  const filas = r.map(e => `<div class="fila" onclick="abrirEvento('${e.id}')">${foto(e, 'mini')}<div class="fila-texto"><b>${e.titulo}</b><span>${e.dia} ${e.hora} · ${subDist(e)}</span></div></div>`).join('');
+  const filas = r.map(e => `<div class="fila" onclick="abrirEvento('${e.id}')">${foto(e, 'mini')}<div class="fila-texto"><b>${esc(e.titulo)}</b><span>${e.dia} · ${subDist(e)}</span></div></div>`).join('');
   const orde = miUbic ? `<span class="ordenar" onclick="orden=(orden==='cerca'?'dia':'cerca');dibujar()">Ordenar: ${orden === 'cerca' ? 'cercanía' : 'día'}</span>` : '<span></span>';
   return `<div class="pantalla sinpad"><div class="cuerpo">
     <div class="buscar-fila">${buscador()}<button class="atras rojo" onclick="ir('filtro')">☰</button></div>
@@ -478,22 +672,25 @@ function vistaResultados() {
 
 // ===== AGENDA =====
 function vistaAgenda() {
-  const hoy = new Date(), lun = new Date(hoy); lun.setDate(hoy.getDate() - hoyIdx());
-  const dias = ['L', 'M', 'X', 'J', 'V', 'S', 'D'].map((l, i) => {
-    const d = new Date(lun); d.setDate(lun.getDate() + i);
-    return `<button class="dia ${diaSel === i ? 'on' : ''}" onclick="diaSel=${i};dibujar()"><small>${l}</small>${d.getDate()}</button>`;
-  }).join('');
-  const items = agenda.map(buscar).filter(e => e.dias.includes(diaSel)).sort((a, b) => a.ini.localeCompare(b.ini));
+  const lun = sumarDias(hoyDate(), -hoyIdx() + 7 * semOff);
+  const dias = ['L', 'M', 'X', 'J', 'V', 'S', 'D'].map((l, i) =>
+    `<button class="dia ${diaSel === i ? 'on' : ''}" onclick="diaSel=${i};dibujar()"><small>${l}</small>${sumarDias(lun, i).getDate()}</button>`).join('');
+  const fechaSel = sumarDias(lun, diaSel);
+  const items = agenda.map(buscar).filter(e => ocurre(e, fechaSel)).sort((a, b) => a.ini.localeCompare(b.ini));
   const filas = items.map(e => `<div class="ag-item"><span class="ag-hora">${e.ini}</span>
     <div class="ag-card" style="border-left:5px solid ${catDe(e.cat).color}" onclick="abrirEvento('${e.id}')">
-      <div style="flex:1"><b>${e.titulo}</b><span>${catDe(e.cat).nombre} · ${e.zona}</span></div>
+      <div style="flex:1"><b>${esc(e.titulo)}</b><span>${catDe(e.cat).nombre} · ${e.zona}</span></div>
       <button class="check ${hechos.includes(e.id) ? 'on' : ''}" onclick="event.stopPropagation();hechos=alternar(hechos,'${e.id}');dibujar()">${hechos.includes(e.id) ? '✓' : ''}</button>
     </div></div>`).join('');
   const vacio = `<div class="vacio-box"><div class="circ-blanco">${icono('Calendario')}</div><div class="serif">Sin planes este día</div>
     <p>Probá con otro día o explorá propuestas cerca tuyo</p><button class="continuar" onclick="irTab('explorar')">Explorar planes</button></div>`;
   return `<div class="pantalla sinpad"><div class="cuerpo">
     <div class="header" style="padding:0">${logoImg('l-header')}<button class="menu" onclick="abrirMenu()">≡</button></div>
-    <div class="mes">${hoy.toLocaleDateString('es-AR', { month: 'long', year: 'numeric' })}</div>
+    <div class="mes-fila">
+      <button class="flecha-sem" onclick="cambiarSemana(-1)" ${semOff === 0 ? 'disabled' : ''}>‹</button>
+      <div class="mes">${fechaSel.toLocaleDateString('es-AR', { month: 'long', year: 'numeric' })}</div>
+      <button class="flecha-sem" onclick="cambiarSemana(1)">›</button>
+    </div>
     <div class="dias">${dias}</div>
     ${items.length ? filas : vacio}
   </div>${barra('Agenda')}</div>`;
@@ -510,7 +707,7 @@ function vistaListo() {
 function vistaFavoritos() {
   const lista = favoritos.map(buscar).filter(e => favFiltro === 'todo' || e.cat === favFiltro);
   const cards = lista.map(e => `<div class="fav-card" onclick="abrirEvento('${e.id}')"><div class="portada-wrap" style="margin:0">${foto(e, 'fav')}
-    <button class="corazon-flot" onclick="alternarFav('${e.id}', event)">${icono('Favoritos', true)}</button></div><b>${e.titulo}</b><span class="s">${e.dia} ${e.hora}</span></div>`).join('');
+    <button class="corazon-flot" onclick="alternarFav('${e.id}', event)">${icono('Favoritos', true)}</button></div><b>${esc(e.titulo)}</b><span class="s">${e.dia}</span></div>`).join('');
   const vacio = `<div class="vacio-box"><div class="circ-blanco">${icono('Favoritos')}</div><div class="serif">Todavía no guardaste nada</div>
     <p>Tocá el corazón en los planes que te gusten y los vas a ver acá.</p><button class="continuar" onclick="irTab('explorar')">Explorar planes</button></div>`;
   return `<div class="pantalla sinpad"><div class="cuerpo">${cab('Favoritos')}
@@ -634,7 +831,7 @@ function vistaCompartir() {
   const img = c.e ? foto(c.e, 'mini') : `<div class="foto mini" style="background:#631100;display:flex;align-items:center;justify-content:center">${logoImg('claro l-mini')}</div>`;
   return `<div class="menu-fondo" onclick="compartirItem=null; dibujar()"></div>
   <div class="hoja"><div class="agarre"></div>
-    <div class="mini-ev">${img}<div><b>${c.titulo}</b><span>${c.sub}</span></div></div>
+    <div class="mini-ev">${img}<div><b>${esc(c.titulo)}</b><span>${c.sub}</span></div></div>
     <h3>Enviar a amigos</h3><div class="fila4">${amigos}</div>
     <h3>Compartir en</h3><div class="fila4">${redes}</div>
     <div class="link"><span>afin.app/${c.id === 'afin' ? '' : c.id}</span><button onclick="copiarLink()">${copiado ? 'Copiado' : 'Copiar'}</button></div>
