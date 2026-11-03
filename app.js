@@ -1,8 +1,8 @@
 // =====================================================================
 //  DATOS DE LA CUENTA DE INSTAGRAM (cambiá el usuario por el real)
 // =====================================================================
-const INSTAGRAM_USER = 'afin.app';
-const INSTAGRAM_URL = 'https://www.instagram.com/' + INSTAGRAM_USER + '/';
+const INSTAGRAM_USER = 'afin.cultura';
+const INSTAGRAM_URL = 'https://www.instagram.com/afin.cultura/';
 
 // =====================================================================
 //  CATEGORÍAS
@@ -597,11 +597,22 @@ function iniciarMapa() {
   if (!el) return;
   if (typeof L === 'undefined') { el.innerHTML = '<div class="mapa-error">No se pudo cargar el mapa. Revisá tu conexión a internet.</div>'; return; }
   if (mapaObj) { mapaObj.remove(); mapaObj = null; }
-  mapaObj = L.map(el).setView([-34.6037, -58.3816], 12);
-  // Mapa de CARTO (funciona también abriendo el archivo con doble clic)
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-    subdomains: 'abcd', maxZoom: 19, attribution: '© OpenStreetMap · © CARTO'
-  }).addTo(mapaObj);
+  const centro = [-34.6037, -58.3816];
+  mapaObj = L.map(el).setView(centro, 12);
+
+  // Dos proveedores de mapa: si uno falla, se usa el otro automáticamente
+  const osm = { url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png', op: { maxZoom: 19, attribution: '© OpenStreetMap' } };
+  const esri = { url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', op: { maxZoom: 19, maxNativeZoom: 18, attribution: 'Tiles © Esri' } };
+  let capa = null;
+  const poner = (p, otro) => {
+    if (capa) mapaObj.removeLayer(capa);
+    capa = L.tileLayer(p.url, p.op).addTo(mapaObj);
+    let errores = 0;
+    capa.on('tileerror', () => { errores++; if (otro && errores === 4) poner(otro, null); });
+  };
+  // Abriendo el archivo con doble clic, OpenStreetMap bloquea el mapa: se usa Esri.
+  // Con Live Server se usa OpenStreetMap.
+  if (location.protocol === 'file:') poner(esri, osm); else poner(osm, esri);
 
   const vis = eventos.filter(e => chipExp === 'todo' || e.cat === chipExp);
   const porLugar = {};
@@ -615,12 +626,14 @@ function iniciarMapa() {
     L.marker([lu.lat, lu.lng], { icon }).addTo(mapaObj).bindPopup(html);
     puntos.push([lu.lat, lu.lng]);
   });
-  // La persona se marca en el mapa, y se incluye en el zoom solo si está cerca de la ciudad
+  // La persona se marca en el mapa
   if (miUbic) {
     L.circleMarker([miUbic.lat, miUbic.lng], { radius: 8, color: '#fff', weight: 3, fillColor: '#002B49', fillOpacity: 1 }).addTo(mapaObj);
-    if (kmEntre(miUbic.lat, miUbic.lng, -34.6037, -58.3816) < 40) puntos.push([miUbic.lat, miUbic.lng]);
+    puntos.push([miUbic.lat, miUbic.lng]);
   }
-  if (puntos.length) mapaObj.fitBounds(puntos, { padding: [26, 26], maxZoom: 15 });
+  // El zoom se ajusta a lo que está dentro de la Ciudad (los lugares lejanos, como San Isidro, quedan afuera del encuadre)
+  const cerca = puntos.filter(p => kmEntre(p[0], p[1], centro[0], centro[1]) < 15);
+  if (cerca.length) mapaObj.fitBounds(cerca, { padding: [26, 26], maxZoom: 15 });
 }
 function vistaExplorar() {
   let lista = eventos.filter(e => chipExp === 'todo' || e.cat === chipExp);
