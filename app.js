@@ -1,4 +1,10 @@
 // =====================================================================
+//  DATOS DE LA CUENTA DE INSTAGRAM (cambiá el usuario por el real)
+// =====================================================================
+const INSTAGRAM_USER = 'afin.app';
+const INSTAGRAM_URL = 'https://www.instagram.com/' + INSTAGRAM_USER + '/';
+
+// =====================================================================
 //  CATEGORÍAS
 // =====================================================================
 const categorias = [
@@ -65,7 +71,7 @@ const LUGARES = {
 //  PLANES
 //  en: id del lugar | dias: 0=lunes ... 5=sábado, 6=domingo
 //  fechas: lista de días puntuales (año-mes-día)  | desde / hasta: rango (si no ponés nada: hoy hasta fin de 2027)
-//  precio: 0 es gratis | imagen: solo si el plan tiene foto propia (si no, usa la del lugar)
+//  precio: 0 es gratis | imagen: foto propia del plan (si no hay, usa la del lugar)
 //  Los planes de museos, teatros y cines son EJEMPLOS: reemplazalos por la cartelera real.
 // =====================================================================
 const EVENTOS = [
@@ -153,12 +159,12 @@ const EVENTOS = [
   { id: 'atlasalcorta-animacion', en: 'atlasalcorta', titulo: 'Cine de animación para toda la familia', cat: 'cine', sub: 'Animación', dias: [5, 6], dia: 'Sáb y dom', hora: '14 a 18 h', ini: '14:00', precio: 8000,
     desc: 'Películas animadas para ir con chicos y grandes durante el fin de semana.', etiquetas: ['Cine', 'Animación', 'Familiar', 'Finde'] },
 
-  // ---------- MÚSICA ----------
-  { id: 'bunbury', en: 'movistar', titulo: 'Enrique Bunbury en el Movistar Arena', cat: 'musica', sub: 'Conciertos', fechas: ['2026-11-04'], dia: 'Mié 4 nov', hora: '21 h', ini: '21:00', precio: 65000, estreno: true,
+  // ---------- MÚSICA (cada concierto de un artista tiene su foto propia) ----------
+  { id: 'bunbury', en: 'movistar', titulo: 'Enrique Bunbury en el Movistar Arena', cat: 'musica', sub: 'Conciertos', fechas: ['2026-11-04'], dia: 'Mié 4 nov', hora: '21 h', ini: '21:00', precio: 65000, estreno: true, imagen: 'bunbury.jpg',
     desc: 'Concierto del cantautor español en el Movistar Arena. Confirmá fecha y horario con la ticketera.', etiquetas: ['Música', 'Conciertos', 'Rock', 'En vivo'] },
-  { id: 'rush', en: 'movistar', titulo: 'Rush en el Movistar Arena', cat: 'musica', sub: 'Conciertos', fechas: ['2027-01-15'], dia: 'Vie 15 ene', hora: '21 h', ini: '21:00', precio: 90000,
+  { id: 'rush', en: 'movistar', titulo: 'Rush en el Movistar Arena', cat: 'musica', sub: 'Conciertos', fechas: ['2027-01-15'], dia: 'Vie 15 ene', hora: '21 h', ini: '21:00', precio: 90000, imagen: 'rush.jpg',
     desc: 'Show en el Movistar Arena. Confirmá fecha y horario con la ticketera.', etiquetas: ['Música', 'Conciertos', 'Rock', 'En vivo'] },
-  { id: 'tomlinson', en: 'movistar', titulo: 'Louis Tomlinson en el Movistar Arena', cat: 'musica', sub: 'Conciertos', fechas: ['2027-04-02'], dia: 'Vie 2 abr', hora: '21 h', ini: '21:00', precio: 80000,
+  { id: 'tomlinson', en: 'movistar', titulo: 'Louis Tomlinson en el Movistar Arena', cat: 'musica', sub: 'Conciertos', fechas: ['2027-04-02'], dia: 'Vie 2 abr', hora: '21 h', ini: '21:00', precio: 80000, imagen: 'tomlinson.jpg',
     desc: 'Show en el Movistar Arena. Confirmá fecha y horario con la ticketera.', etiquetas: ['Música', 'Conciertos', 'Pop', 'En vivo'] },
   { id: 'primavera', en: 'clubciudad', titulo: 'Primavera Sound Buenos Aires', cat: 'musica', sub: 'Festivales', fechas: ['2026-11-28', '2026-11-29'], dia: 'Sáb 28 y dom 29 nov', hora: 'Desde la tarde', ini: '15:00', precio: 185000, estreno: true, imagen: 'primavera.jpg',
     desc: 'Festival de dos días con Gorillaz, The Strokes, FKA twigs y muchos más.', etiquetas: ['Música', 'Festivales', 'Gorillaz', 'The Strokes'] },
@@ -191,19 +197,10 @@ const eventos = EVENTOS.map(e => {
     imagen: e.imagen || lu.imagen, desde: e.desde || '2026-11-02', hasta: e.hasta || '2027-12-31' };
 }).map(e => ({ ...e, prox: proximaFecha(e) })).filter(e => e.prox);
 
-// ===== NOTIFICACIONES (de ejemplo) =====
-const notifs = [
-  { id: 'n1', grupo: 'Hoy', tipo: 'recordatorio', ico: 'Notificaciones', color: '#631100', t: 'Empieza en 2 horas', s: 'Noche de stand up · 21 h' },
-  { id: 'n2', grupo: 'Hoy', tipo: 'novedad', ico: 'Grilla', color: '#002B49', t: 'Nuevo estreno afín a vos', s: 'Estrenos de la semana · Cinemark Palermo' },
-  { id: 'n3', grupo: 'Hoy', tipo: 'aviso', ico: 'Favoritos', color: '#B52000', t: 'Se agotan las entradas', s: 'Primavera Sound · Sáb 28 nov' },
-  { id: 'n4', grupo: 'Antes', tipo: 'recordatorio', ico: 'Calendario', color: '#53779A', t: 'Agendaste una muestra', s: 'MALBA · Muestra latinoamericana' },
-  { id: 'n5', grupo: 'Antes', tipo: 'novedad', ico: 'Ubicacion', color: '#002B49', t: 'Plan nuevo en Palermo', s: 'Museo Evita · Visita guiada' },
-  { id: 'n6', grupo: 'Antes', tipo: 'compartido', ico: 'Compartir', color: '#631100', t: 'Cami te compartió un plan', s: 'Lollapalooza · 12 de marzo' }
-];
-
-// ===== AYUDA Y TÉRMINOS =====
+// ===== AYUDA, TÉRMINOS Y SOBRE AFÍN =====
 const FAQ = [
   ['¿Cómo guardo un plan en mi agenda?', 'Entrá al plan que te interesa y tocá "Guardar en mi agenda". Después lo ves en la pestaña Agenda, en el día que corresponde.'],
+  ['¿Cómo funcionan los recordatorios?', 'Cuando guardás un plan en tu agenda, te avisamos en Notificaciones: confirmamos que lo agendaste y te lo recordamos antes de que empiece. Podés apagarlos con el botón de abajo.'],
   ['¿Cómo cambio mis intereses?', 'Andá a Perfil y tocá "Editar" al lado de "Mis intereses". Ahí podés elegir otras categorías y subcategorías.'],
   ['¿Por qué me piden mi ubicación?', 'Para mostrarte qué planes hay cerca tuyo y ordenarlos por distancia. Es opcional, no la guardamos y no la compartimos con nadie.'],
   ['¿Los planes son solo en Buenos Aires?', 'Casi todos son en la Ciudad de Buenos Aires. Algunos festivales grandes pueden hacerse en el Gran Buenos Aires y se indica en el plan.'],
@@ -218,6 +215,19 @@ const TERMINOS = [
   ['Lo que no hacemos', 'No vendemos tus datos ni los compartimos con terceros.'],
   ['Cambios y contacto', 'Si actualizamos estos términos, vas a ver la fecha nueva arriba. Si tenés dudas, escribinos a hola@afin.app.']
 ];
+// Textos de "Sobre Afín": corto (se ve primero) y largo (se ve con "Ver más")
+const SOBRE = {
+  intro: { corto: 'Conectamos a las personas con la cultura de Buenos Aires.', largo: 'Afín conecta a las personas con propuestas culturales como el teatro, el cine y el arte, según lo que le gusta a cada una.' },
+  mision: { corto: 'Acercar la cultura a las personas.', largo: 'Acercar la cultura a las personas, ayudándolas a descubrir espectáculos y espacios afines a sus intereses.' },
+  vision: { corto: 'Ser la plataforma de referencia para el público joven.', largo: 'Convertirse en una plataforma referente para el público joven a la hora de descubrir y participar de propuestas culturales.' },
+  valores: [
+    ['Afinidad', 'Te mostramos lo que va con vos.'],
+    ['Accesibilidad', 'Cultura al alcance de todos.'],
+    ['Curiosidad', 'Te invitamos a descubrir algo nuevo.'],
+    ['Diversidad', 'Teatro, cine, arte y música.'],
+    ['Calidez', 'Un trato cercano y amable.']
+  ]
+};
 
 // =====================================================================
 //  ESTADO: lo que la persona va eligiendo
@@ -230,20 +240,35 @@ let miUbic = null, ubicEstado = 'no'; // 'no' | 'pidiendo' | 'ok' | 'negado' | '
 let mapaObj = null;
 
 let pantalla = 'splash', pila = [];
-let gustos = [], subsElegidas = [], abierta = null, filtro = 'todo', faqAbierta = null;
+let gustos = [], subsElegidas = [], abierta = null, filtro = 'todo', faqAbierta = null, sobreAbierto = [];
 let eventoActual = null, menuAbierto = false, compartirItem = null, copiado = false, modalListo = false;
-let favoritos = [], agenda = [], hechos = [], diaSel = hoyIdx(), semOff = 0, favFiltro = 'todo';
+let favoritos = [], agenda = [], agendaLog = [], hechos = [], diaSel = hoyIdx(), semOff = 0, favFiltro = 'todo';
 let q = '', chipExp = 'todo', fCats = [], fFecha = null, fDist = 20, fPrecio = 200000, orden = 'cerca';
 let notifFiltro = 'todas', notifLeidas = [], recordar = true;
 
 const PRECIO_MAX = 200000;
 const app = document.getElementById('app');
 
+// La agenda, los favoritos y los avisos quedan guardados en el navegador
+function cargarEstado() {
+  try {
+    const s = JSON.parse(localStorage.getItem('afin_estado') || '{}');
+    const ok = id => eventos.some(e => e.id === id);
+    agenda = (s.agenda || []).filter(ok);
+    favoritos = (s.favoritos || []).filter(ok);
+    agendaLog = (s.agendaLog || []).filter(a => ok(a.id) && agenda.includes(a.id));
+  } catch (e) {}
+}
+function persistir() {
+  try { localStorage.setItem('afin_estado', JSON.stringify({ agenda, favoritos, agendaLog })); } catch (e) {}
+}
+
 // ===== FUNCIONES ÚTILES =====
 function alternar(lista, x) { return lista.includes(x) ? lista.filter(i => i !== x) : [...lista, x]; }
 function buscar(id) { return eventos.find(e => e.id === id); }
 function catDe(id) { return categorias.find(c => c.id === id); }
 function precioTxt(e) { return e.precio ? '$' + e.precio.toLocaleString('es-AR') : 'Gratis'; }
+function abrirInstagram() { window.open(INSTAGRAM_URL, '_blank', 'noopener'); }
 
 // ===== UBICACIÓN =====
 function pedirUbicacion() {
@@ -291,14 +316,21 @@ function irTab(p) { pila = []; pantalla = p; menuAbierto = false; compartirItem 
 function atras() { pantalla = pila.pop() || 'inicio'; menuAbierto = false; compartirItem = null; dibujar(); }
 function abrirMenu() { menuAbierto = true; dibujar(); }
 function abrirEvento(id) { eventoActual = id; ir('evento'); }
-function alternarFav(id, ev) { ev.stopPropagation(); favoritos = alternar(favoritos, id); dibujar(); }
+function alternarFav(id, ev) { ev.stopPropagation(); favoritos = alternar(favoritos, id); persistir(); dibujar(); }
 function reiniciar() { pila = []; pantalla = 'splash'; dibujar(); setTimeout(() => ir('gustos'), 2000); }
 function irMenu(p) { menuAbierto = false; if (['inicio', 'explorar', 'agenda', 'perfil'].includes(p)) irTab(p); else ir(p); }
 
+// Guardar o sacar un plan de la agenda (al guardarlo se crean sus avisos)
 function guardarAgenda(id) {
-  if (agenda.includes(id)) agenda = alternar(agenda, id);
-  else { agenda.push(id); modalListo = true; }
-  dibujar();
+  if (agenda.includes(id)) {
+    agenda = alternar(agenda, id);
+    agendaLog = agendaLog.filter(a => a.id !== id);
+  } else {
+    agenda.push(id);
+    agendaLog.push({ id, ts: Date.now(), via: (pila.includes('resultados') || pila.includes('filtro')) ? 'busqueda' : 'otro' });
+    modalListo = true;
+  }
+  persistir(); dibujar();
 }
 // Lleva a la agenda en la semana y el día del próximo encuentro del plan
 function verAgenda() {
@@ -353,7 +385,8 @@ function icono(n, lleno) {
     'Salir': '<path d="M10 4H5v16h5M15 8l4 4-4 4M19 12H9"/>',
     'Documento': '<path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/>',
     'Play': '<path d="M8 5l11 7-11 7z"/>',
-    'Ruta': '<path d="M3 11l18-8-8 18-2-8z"/>'
+    'Ruta': '<path d="M3 11l18-8-8 18-2-8z"/>',
+    'Instagram': '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/>'
   }[n] || '';
   return `<svg class="svg-ico" viewBox="0 0 24 24" fill="${lleno ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
 }
@@ -565,7 +598,10 @@ function iniciarMapa() {
   if (typeof L === 'undefined') { el.innerHTML = '<div class="mapa-error">No se pudo cargar el mapa. Revisá tu conexión a internet.</div>'; return; }
   if (mapaObj) { mapaObj.remove(); mapaObj = null; }
   mapaObj = L.map(el).setView([-34.6037, -58.3816], 12);
-  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '© OpenStreetMap' }).addTo(mapaObj);
+  // Mapa de CARTO (funciona también abriendo el archivo con doble clic)
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+    subdomains: 'abcd', maxZoom: 19, attribution: '© OpenStreetMap · © CARTO'
+  }).addTo(mapaObj);
 
   const vis = eventos.filter(e => chipExp === 'todo' || e.cat === chipExp);
   const porLugar = {};
@@ -676,7 +712,7 @@ function vistaAgenda() {
   const dias = ['L', 'M', 'X', 'J', 'V', 'S', 'D'].map((l, i) =>
     `<button class="dia ${diaSel === i ? 'on' : ''}" onclick="diaSel=${i};dibujar()"><small>${l}</small>${sumarDias(lun, i).getDate()}</button>`).join('');
   const fechaSel = sumarDias(lun, diaSel);
-  const items = agenda.map(buscar).filter(e => ocurre(e, fechaSel)).sort((a, b) => a.ini.localeCompare(b.ini));
+  const items = agenda.map(buscar).filter(e => e && ocurre(e, fechaSel)).sort((a, b) => a.ini.localeCompare(b.ini));
   const filas = items.map(e => `<div class="ag-item"><span class="ag-hora">${e.ini}</span>
     <div class="ag-card" style="border-left:5px solid ${catDe(e.cat).color}" onclick="abrirEvento('${e.id}')">
       <div style="flex:1"><b>${esc(e.titulo)}</b><span>${catDe(e.cat).nombre} · ${e.zona}</span></div>
@@ -705,7 +741,7 @@ function vistaListo() {
 
 // ===== FAVORITOS =====
 function vistaFavoritos() {
-  const lista = favoritos.map(buscar).filter(e => favFiltro === 'todo' || e.cat === favFiltro);
+  const lista = favoritos.map(buscar).filter(e => e && (favFiltro === 'todo' || e.cat === favFiltro));
   const cards = lista.map(e => `<div class="fav-card" onclick="abrirEvento('${e.id}')"><div class="portada-wrap" style="margin:0">${foto(e, 'fav')}
     <button class="corazon-flot" onclick="alternarFav('${e.id}', event)">${icono('Favoritos', true)}</button></div><b>${esc(e.titulo)}</b><span class="s">${e.dia}</span></div>`).join('');
   const vacio = `<div class="vacio-box"><div class="circ-blanco">${icono('Favoritos')}</div><div class="serif">Todavía no guardaste nada</div>
@@ -715,20 +751,65 @@ function vistaFavoritos() {
   </div>${barra('Perfil')}</div>`;
 }
 
-// ===== NOTIFICACIONES =====
+// ===== NOTIFICACIONES (se arman solas con los planes de la agenda) =====
+function notifsActuales() {
+  const lista = [], hoy = hoyDate(), hoyStr = new Date().toDateString();
+  agendaLog.forEach(a => {
+    const e = buscar(a.id);
+    if (!e) return;
+    const dist = distTxt(e);
+    // Aviso de que se agendó el plan (pasado)
+    lista.push({
+      id: 'ag-' + a.id + '-' + a.ts, evId: a.id, tipo: 'agenda', ico: 'Calendario', color: catDe(e.cat).color,
+      grupo: new Date(a.ts).toDateString() === hoyStr ? 'Hoy' : 'Antes', orden: -a.ts,
+      t: 'Agendaste este plan',
+      s: e.titulo + ' · ' + e.dia + ' · ' + e.hora + (a.via === 'busqueda' ? ' · desde tu búsqueda' : '') + (dist ? ' · ' + dist : '')
+    });
+    // Recordatorio (futuro)
+    if (recordar) {
+      const f = proximaFecha(e);
+      if (f) {
+        const dias = Math.round((f - hoy) / 86400000);
+        let t;
+        if (dias === 0) {
+          const [hh, mm] = e.ini.split(':').map(Number), ini = new Date();
+          ini.setHours(hh, mm, 0, 0);
+          const mins = Math.round((ini - new Date()) / 60000);
+          t = mins > 0 ? 'Empieza en ' + (mins >= 60 ? Math.floor(mins / 60) + ' h' + (mins % 60 ? ' ' + (mins % 60) + ' min' : '') : mins + ' min') : 'Es hoy';
+        } else if (dias === 1) t = 'Mañana';
+        else if (dias <= 7) t = 'En ' + dias + ' días';
+        else t = 'Te avisamos antes · faltan ' + dias + ' días';
+        lista.push({
+          id: 'rec-' + a.id + '-' + iso(f), evId: a.id, tipo: 'recordatorio', ico: 'Notificaciones', color: '#631100',
+          grupo: dias === 0 ? 'Hoy' : 'Próximos', orden: f.getTime(),
+          t: 'Recordatorio: ' + t, s: e.titulo + ' · ' + e.hora
+        });
+      }
+    }
+  });
+  return lista.sort((a, b) => a.orden - b.orden);
+}
+function nNuevas() { return notifsActuales().filter(n => !notifLeidas.includes(n.id)).length; }
+function leerNotif(id, evId) {
+  if (!notifLeidas.includes(id)) notifLeidas.push(id);
+  abrirEvento(evId);
+}
 function vistaNotif() {
-  const lista = notifs.filter(n => notifFiltro === 'todas' || n.tipo === 'recordatorio');
+  const lista = notifsActuales().filter(n => notifFiltro === 'todas' || n.tipo === 'recordatorio');
   const grupo = g => {
     const it = lista.filter(n => n.grupo === g);
-    return it.length ? `<div class="n-sec">${g}</div>` + it.map(n => `<div class="n-item" onclick="if(!notifLeidas.includes('${n.id}'))notifLeidas.push('${n.id}');dibujar()">
-      <div class="n-ico" style="background:${n.color}">${icono(n.ico)}</div><div class="n-txt"><b>${n.t}</b><span>${n.s}</span></div>
-      ${(n.id === 'n1' || n.id === 'n2') && !notifLeidas.includes(n.id) ? '<div class="punto-r"></div>' : ''}</div>`).join('') : '';
+    return it.length ? `<div class="n-sec">${g}</div>` + it.map(n => `<div class="n-item" onclick="leerNotif('${n.id}','${n.evId}')">
+      <div class="n-ico" style="background:${n.color}">${icono(n.ico)}</div><div class="n-txt"><b>${esc(n.t)}</b><span>${esc(n.s)}</span></div>
+      ${notifLeidas.includes(n.id) ? '' : '<div class="punto-r"></div>'}</div>`).join('') : '';
   };
+  const vacio = `<div class="vacio-box"><div class="circ-blanco">${icono('Notificaciones')}</div><div class="serif">${notifFiltro === 'rec' ? 'Sin recordatorios' : 'Sin notificaciones'}</div>
+    <p>Cuando guardes un plan en tu agenda, vas a ver acá su recordatorio.</p><button class="continuar" onclick="irTab('explorar')">Explorar planes</button></div>`;
   return `<div class="pantalla sinpad"><div class="cuerpo">${cab('Notificaciones')}
     <div class="chips-fila" style="margin-bottom:6px">
       <button class="chip2 ${notifFiltro === 'todas' ? 'on' : ''}" onclick="notifFiltro='todas';dibujar()">Todas</button>
       <button class="chip2 ${notifFiltro === 'rec' ? 'on' : ''}" onclick="notifFiltro='rec';dibujar()">Recordatorios</button></div>
-    ${grupo('Hoy')}${grupo('Antes')}
+    ${!recordar ? '<p class="vacio-msg" style="padding:8px 0">Los recordatorios están apagados.</p>' : ''}
+    ${lista.length ? grupo('Hoy') + grupo('Próximos') + grupo('Antes') : vacio}
   </div>
   <div class="recordar"><span>Recordarme antes de cada plan</span><button class="switch ${recordar ? 'on' : ''}" onclick="recordar=!recordar;dibujar()"></button></div>
   ${barra('Perfil')}</div>`;
@@ -753,11 +834,13 @@ function vistaLogin() {
 function vistaPerfil() {
   const chips = [...categorias.map(c => [c.nombre, gustos.includes(c.id)]), ...subsElegidas.map(s => [s.split(':')[1], true])]
     .map(([n, on]) => `<span class="chip3 ${on ? 'on' : ''}">${n}</span>`).join('');
-  const filas = [['Favoritos', 'Favoritos', "ir('favoritos')"], ['Notificaciones', 'Notificaciones', "ir('notificaciones')"],
-    ['Sobre Afín', 'Sobre Afín', "ir('sobre')"], ['Compartir', 'Compartir Afín', "abrirCompartir('afin')"],
-    ['Ayuda', 'Ayuda y contacto', "ir('ayuda')"], ['Documento', 'Términos y privacidad', "ir('terminos')"],
-    ...(usuario ? [['Salir', 'Cerrar sesión', 'cerrarSesion()']] : [])]
-    .map(([i, n, f]) => `<div class="row" onclick="${f}"><span class="ico2">${icono(i)}</span><b>${n}</b><span class="fl2">›</span></div>`).join('');
+  const nuevas = nNuevas();
+  const filas = [['Favoritos', 'Favoritos', "ir('favoritos')", 0], ['Notificaciones', 'Notificaciones', "ir('notificaciones')", nuevas],
+    ['Sobre Afín', 'Sobre Afín', "ir('sobre')", 0], ['Compartir', 'Compartir Afín', "abrirCompartir('afin')", 0],
+    ['Instagram', 'Seguinos en Instagram', 'abrirInstagram()', 0],
+    ['Ayuda', 'Ayuda y contacto', "ir('ayuda')", 0], ['Documento', 'Términos y privacidad', "ir('terminos')", 0],
+    ...(usuario ? [['Salir', 'Cerrar sesión', 'cerrarSesion()', 0]] : [])]
+    .map(([i, n, f, b]) => `<div class="row" onclick="${f}"><span class="ico2">${icono(i)}</span><b>${n}</b>${b ? `<span class="badge">${b}</span>` : ''}<span class="fl2">›</span></div>`).join('');
   const datos = usuario ? [usuario.ciudad, usuario.edad ? usuario.edad + ' años' : ''].filter(Boolean).join(' · ') : '';
   const cabecera = usuario
     ? `<div class="avatar-g">${esc(usuario.nombre.charAt(0).toUpperCase())}</div><div class="serif p-nombre">${esc(usuario.nombre)}</div><div class="p-sub">${esc(datos)}</div>`
@@ -772,15 +855,25 @@ function vistaPerfil() {
   </div>${barra('Perfil')}</div>`;
 }
 
-// ===== SOBRE AFÍN =====
+// ===== SOBRE AFÍN (texto corto + "Ver más") =====
+function masBtn(id, clase) {
+  const ab = sobreAbierto.includes(id);
+  return `<button class="ver-mas ${clase || ''}" onclick="sobreAbierto=alternar(sobreAbierto,'${id}');dibujar()">${ab ? 'Ver menos' : 'Ver más'}</button>`;
+}
 function vistaSobre() {
+  const ab = id => sobreAbierto.includes(id);
+  const bloque = (id, clase, titulo) => `<div class="bloque ${clase}"><h4>${titulo}</h4><p>${ab(id) ? SOBRE[id].largo : SOBRE[id].corto}</p>${masBtn(id)}</div>`;
+  const chipsVal = SOBRE.valores.map(v => `<span>${v[0]}</span>`).join('');
+  const listaVal = ab('valores') ? `<div class="val-lista">${SOBRE.valores.map(v => `<div><b>${v[0]}:</b> ${v[1]}</div>`).join('')}</div>` : '';
   return `<div class="pantalla">${cab('Sobre Afín')}
     <div class="scroll">
       <div class="logo-cuad">${logoImg('claro l-cuad')}</div>
-      <p class="sobre-t">Afín conecta a las personas con propuestas culturales como el teatro, el cine y el arte</p>
-      <div class="bloque bordo"><h4>Misión</h4><p>Acercar la cultura a las personas, ayudándolas a descubrir espectáculos y espacios afines a sus intereses.</p></div>
-      <div class="bloque navy"><h4>Visión</h4><p>Convertirse en una plataforma referente para el público joven a la hora de descubrir y participar de propuestas culturales.</p></div>
-      <div class="bloque blanco"><h4>Valores</h4><div class="valores"><span>Afinidad</span><span>Accesibilidad</span><span>Curiosidad</span><span>Diversidad</span><span>Calidez</span></div></div>
+      <p class="sobre-t">${ab('intro') ? SOBRE.intro.largo : SOBRE.intro.corto}</p>
+      ${masBtn('intro', 'centro')}
+      ${bloque('mision', 'bordo', 'Misión')}
+      ${bloque('vision', 'navy', 'Visión')}
+      <div class="bloque blanco"><h4>Valores</h4><div class="valores">${chipsVal}</div>${listaVal}${masBtn('valores')}</div>
+      <button class="btn-insta" onclick="abrirInstagram()">${icono('Instagram')}<span>Seguinos en Instagram<small>@${INSTAGRAM_USER}</small></span></button>
     </div></div>`;
 }
 
@@ -808,7 +901,8 @@ function vistaMenu() {
   const it = [['Inicio', 'inicio'], ['Explorar', 'explorar'], ['Agenda', 'agenda'], ['Favoritos', 'favoritos'], ['Notificaciones', 'notificaciones'], ['Perfil', 'perfil']];
   const items = it.map(([n, p]) => `<button class="menu-item ${pantalla === p ? 'on' : ''}" onclick="irMenu('${p}')">${icono(n)}${n}${pantalla === p ? '<span class="fl">›</span>' : ''}</button>`).join('');
   const abajo = [['Sobre Afín', 'Sobre Afín', 'sobre'], ['Ayuda', 'Ayuda y contacto', 'ayuda'], ['Documento', 'Términos y privacidad', 'terminos']]
-    .map(([i, n, p]) => `<button class="menu-item ${pantalla === p ? 'on' : ''}" onclick="irMenu('${p}')">${icono(i)}${n}</button>`).join('');
+    .map(([i, n, p]) => `<button class="menu-item ${pantalla === p ? 'on' : ''}" onclick="irMenu('${p}')">${icono(i)}${n}</button>`).join('')
+    + `<button class="menu-item" onclick="abrirInstagram()">${icono('Instagram')}Instagram</button>`;
   const quien = usuario
     ? `<div class="perfil-mini"><div class="avatar">${esc(usuario.nombre.charAt(0).toUpperCase())}</div><div><b>${esc(usuario.nombre)}</b><span>${esc(usuario.ciudad)}</span></div></div>`
     : `<div class="perfil-mini" style="cursor:pointer" onclick="irMenu('login')"><div class="avatar">${icono('Perfil')}</div><div><b>Ingresar</b><span>Iniciá sesión</span></div></div>`;
@@ -826,7 +920,7 @@ function vistaCompartir() {
   const c = compartirItem;
   const amigos = [['Cami', '#631100', 'C'], ['Juan', '#002B49', 'J'], ['Lu', '#53779A', 'L'], ['Mati', '#B52000', 'M']]
     .map(a => `<div><div class="circ" style="background:${a[1]}">${a[2]}</div>${a[0]}</div>`).join('');
-  const redes = [['WhatsApp', '#002B49', 'Mensaje'], ['Instagram', '#631100', 'Compartir'], ['Mensajes', '#53779A', 'Mail'], ['Más', '#35201A', 'Mas']]
+  const redes = [['WhatsApp', '#002B49', 'Mensaje'], ['Instagram', '#631100', 'Instagram'], ['Mensajes', '#53779A', 'Mail'], ['Más', '#35201A', 'Mas']]
     .map(r => `<div><div class="cuad" style="background:${r[1]}">${icono(r[2])}</div>${r[0]}</div>`).join('');
   const img = c.e ? foto(c.e, 'mini') : `<div class="foto mini" style="background:#631100;display:flex;align-items:center;justify-content:center">${logoImg('claro l-mini')}</div>`;
   return `<div class="menu-fondo" onclick="compartirItem=null; dibujar()"></div>
@@ -839,6 +933,7 @@ function vistaCompartir() {
 }
 
 // ===== ARRANQUE =====
+cargarEstado();
 dibujar();
 setTimeout(() => ir('gustos'), 2000);
 // Si la persona ya había dado permiso antes, se usa la ubicación sin volver a preguntar
